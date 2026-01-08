@@ -1,0 +1,7 @@
+﻿.vscode/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+*.csv
+*.pkl
+*.joblib
