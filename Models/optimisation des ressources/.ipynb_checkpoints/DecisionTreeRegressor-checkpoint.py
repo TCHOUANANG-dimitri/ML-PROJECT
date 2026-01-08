@@ -1,7 +1,5 @@
 import numpy as np
 import pandas as pd
-import json
- 
 
 class Node:
     def __init__(self):
@@ -84,39 +82,11 @@ class decisionTreeRegressor: # Class arbre de decision regressif
     def score(self,X,y): # Calcul du coefficient de determination 
         y_pred = self.predict(X)
         return 1-(np.sum((y-y_pred)**2)/np.sum((y-np.mean(y))**2))
-    
-    def save(self, nom):
-        def node_to_dict(node):
-            if node is None:
-                return None
-            return {
-                'feature': int(node.feature) if node.feature is not None else None,
-                'threshold': float(node.threshold) if node.threshold is not None else None,
-                'prediction': float(node.prediction) if node.prediction is not None else None,
-                'left': node_to_dict(node.left),
-                'right': node_to_dict(node.right),
-            }
-
-        with open(nom, 'w', encoding='utf-8') as f:
-            json.dump(node_to_dict(self.root), f, ensure_ascii=False, indent=2)
-        print(f"modèle sauvegardé en JSON: {nom}")
-            
+    def save(self,nom):
+        joblib.dump(self,nom)
+        print("modele sauvegarder")
+        
     @classmethod
-    def load(cls, nom):
-        def dict_to_node(d):
-            if d is None:
-                return None
-            node = Node()
-            node.feature = d.get('feature')
-            node.threshold = d.get('threshold')
-            node.prediction = d.get('prediction')
-            node.left = dict_to_node(d.get('left'))
-            node.right = dict_to_node(d.get('right'))
-            return node
-
-        with open(nom, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-
-        model = cls()  # utilise les hyperparamètres par défaut
-        model.root = dict_to_node(data)
+    def load(self,nom):
+        model=joblib.load(nom)
         return model

@@ -1,7 +1,4 @@
 import numpy as np
-import pandas as pd
-import json
- 
 
 class Node:
     def __init__(self):
@@ -12,17 +9,27 @@ class Node:
         self.right=None # noeud enfant a droite
 
 
-class decisionTreeRegressor: # Class arbre de decision regressif
-    def __init__(self,profondeur_max=20,min_gain=0.0001): # constructeur: il permet d'initialiser les attributs (dans notre cas les hyperparametres d'une instance (objet)
+class GradientBoostingRegressor: # Class arbre de decision regressif
+    def __init__(self,profondeur_max=10,min_gain=1e-5,n_trees=2,learning_rate=0.5): # constructeur: il permet d'initialiser les attributs (dans notre cas les hyperparametres d'une instance (objet)
         self.profondeur_max=profondeur_max
         self.min_gain=min_gain
-        self.root=None
-        self.last_predict=None
+        self.n_trees=n_trees
+        self.learning_rate=learning_rate # taux d'apprentissage
+        self.forest=[] # definition de la foret
+        self.init=None
 
     def fit(self,X,y): # Fonction permettant l'entrainement du modele en utilisant l'arbre construit dans la fonction plus bas
-        self.root=self.build_tree(X,y)
+        r=y-np.mean(y) # calcul des residus initiaux
+        self.init=np.mean(y)
+        F=np.full(len(y),self.init)
+        for i in range(self.n_trees): # construction des differents arbres suivant le nombre fixe
+            tree=self.build_tree(X,r) # entrainement sur les residus
+            preds=self.predict_tree(tree,X) # prediction locale
+            F+= self.learning_rate*preds # mise a jour de la prediction globale
+            r=y-F # mise a jour des residus
+            self.forest.append(tree) # ajout de l'arbre entrainer a la foret
     
-    def build_tree(self,X,y,seuil_min_gain=0.0001,profondeur_max=20,profondeur=0):
+    def build_tree(self,X,y,seuil_min_gain=1e-5,profondeur_max=10,profondeur=0):
         node=Node() # creation du noeud racine
         node.prediction=np.mean(y) # initialisation de la prediction/racine (moyenne de la target)
         variance_parent=np.var(y) # initialisation de la variance de la racine (variance de la target)
@@ -57,7 +64,7 @@ class decisionTreeRegressor: # Class arbre de decision regressif
         node.feature=meilleur_feature
         node.threshold=meilleur_seuil
         # verifier si le gain est significatif ou pas
-        if meilleur_gain<seuil_min_gain or meilleur_feature is None:
+        if meilleur_gain<seuil_min_gain:
             return node
         # application recursive de l'algorithme sur les noeuds enfants gauche et droit
         gauche_idx=X[:,node.feature]<=node.threshold
@@ -66,57 +73,32 @@ class decisionTreeRegressor: # Class arbre de decision regressif
         node.right=self.build_tree(X[droite_idx],y[droite_idx],seuil_min_gain,profondeur_max,profondeur+1)
         return node
 
-    def predict_one(self,x): # effectue une prediction pour une seule instance ( un vecteur en entrer , unscalaire en sortie)
-        return self.predict_recursive(self.root,x)
-        
-    def predict_recursive(self,node,x):
-        if node.left is None and node.right is None:
-            return node.prediction
-        if x[node.feature]<=node.threshold:
-            return self.predict_recursive(node.left,x)
+    def predict_one(self,tree,x): # effectue une prediction pour une seule instance ( un vecteur en entrer , un scalaire en sortie). Ici se sont les residus qui sont predit
+        if tree.left is None and tree.right is None:
+            return tree.prediction
+        if x[tree.feature]<=tree.threshold:
+            return self.predict_one(tree.left,x)
         else:
-            return self.predict_recursive(node.right,x)
+            return self.predict_one(tree.right,x)
 
-    def predict(self,X): # effectue une prediction pour plusieurs vecteurs (plusieurs vecteurs en entrez un vecteur de valeurs predite en sortie
-        self.last_predict=np.array([self.predict_one(x) for x in X])
-        return self.last_predict
+    def predict_tree(self,tree,X): # effectue une prediction pour plusieurs vecteurs (plusieurs vecteurs en entrez un vecteur de valeurs predite en sortie
+        return np.array([self.predict_one(tree,x) for x in X])
+
+    def predict(self,X):
+        F=np.full(len(X),self.init)
+        for tree in self.forest:
+            F+=self.learning_rate*self.predict_tree(tree,X)
+        return F
+
+    def score(self,X,y): # Calcul du coefficient de determination
+        y_pred=self.predict(X)
+        return 1-(np.sum((y-y_pred)**2)/np.sum((y-y.mean())**2))
+
+    def save(self,nom):
+        joblib.dump(self,nom)
+        print("modele sauvegarder")
         
-    def score(self,X,y): # Calcul du coefficient de determination 
-        y_pred = self.predict(X)
-        return 1-(np.sum((y-y_pred)**2)/np.sum((y-np.mean(y))**2))
-    
-    def save(self, nom):
-        def node_to_dict(node):
-            if node is None:
-                return None
-            return {
-                'feature': int(node.feature) if node.feature is not None else None,
-                'threshold': float(node.threshold) if node.threshold is not None else None,
-                'prediction': float(node.prediction) if node.prediction is not None else None,
-                'left': node_to_dict(node.left),
-                'right': node_to_dict(node.right),
-            }
-
-        with open(nom, 'w', encoding='utf-8') as f:
-            json.dump(node_to_dict(self.root), f, ensure_ascii=False, indent=2)
-        print(f"modèle sauvegardé en JSON: {nom}")
-            
     @classmethod
-    def load(cls, nom):
-        def dict_to_node(d):
-            if d is None:
-                return None
-            node = Node()
-            node.feature = d.get('feature')
-            node.threshold = d.get('threshold')
-            node.prediction = d.get('prediction')
-            node.left = dict_to_node(d.get('left'))
-            node.right = dict_to_node(d.get('right'))
-            return node
-
-        with open(nom, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-
-        model = cls()  # utilise les hyperparamètres par défaut
-        model.root = dict_to_node(data)
+    def load(self,nom):
+        model=joblib.load(nom)
         return model

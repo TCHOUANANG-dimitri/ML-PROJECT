@@ -1,5 +1,4 @@
 import numpy as np
-import json
 
 class Node:
     def __init__(self):
@@ -152,53 +151,11 @@ class XGBoostRegressor:
         y_pred = self.predict(X)
         return 1 - (np.sum((y - y_pred)**2) / np.sum((y - np.mean(y))**2))
 
-    def save(self, nom):
-        def node_to_dict(node):
-            if node is None:
-                return None
-            return {
-                'feature': int(node.feature) if node.feature is not None else None,
-                'threshold': float(node.threshold) if node.threshold is not None else None,
-                'prediction': float(node.prediction) if node.prediction is not None else None,
-                'gain': float(getattr(node, 'gain', 0)) if hasattr(node, 'gain') else None,
-                'left': node_to_dict(node.left),
-                'right': node_to_dict(node.right),
-            }
-
-        data = {
-            'profondeur_max': self.profondeur_max,
-            'min_gain': self.min_gain,
-            'n_trees': self.n_trees,
-            'learning_rate': self.learning_rate,
-            'reg_lambda': self.reg_lambda,
-            'init': float(self.init) if self.init is not None else None,
-            'forest': [node_to_dict(tree) for tree in self.forest]
-        }
-        with open(nom, 'w', encoding='utf-8') as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
-
+    def save(self,nom):
+        joblib.dump(self,nom)
+        print("modele sauvegarder")
+        
     @classmethod
-    def load(cls, nom):
-        def dict_to_node(d):
-            if d is None:
-                return None
-            node = Node()
-            node.feature = d['feature']
-            node.threshold = d['threshold']
-            node.prediction = d['prediction']
-            if d.get('gain') is not None:
-                node.gain = d['gain']
-            node.left = dict_to_node(d['left'])
-            node.right = dict_to_node(d['right'])
-            return node
-
-        with open(nom, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        model = cls(profondeur_max=data.get('profondeur_max', 10),
-                    min_gain=data.get('min_gain', 1e-5),
-                    n_trees=data.get('n_trees', 2),
-                    learning_rate=data.get('learning_rate', 0.3),
-                    reg_lambda=data.get('reg_lambda', 1.0))
-        model.init = data.get('init', None)
-        model.forest = [dict_to_node(t) for t in data.get('forest', [])]
+    def load(self,nom):
+        model=joblib.load(nom)
         return model
