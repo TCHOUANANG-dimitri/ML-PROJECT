@@ -1,7 +1,28 @@
-﻿.vscode/
+﻿# Python cache
 __pycache__/
 *.pyc
+*.pyo
+
+# Jupyter
 .ipynb_checkpoints/
-*.csv
-*.pkl
-*.joblib
+
+# IDE
+.vscode/
+.idea/
+
+# Données volumineuses uniquement (gardez les petits fichiers)
+Datasets/*.csv
+Datasets/*.xlsx
+# Si vous avez de petits CSV pour des exemples, décommentez :
+# !Datasets/example.csv
+
+# Modèles très volumineux uniquement
+Models/*.h5
+Models/*.weights
+
+# Système
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
