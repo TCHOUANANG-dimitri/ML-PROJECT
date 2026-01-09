@@ -1,0 +1,1346 @@
+{
+    "moyenne_initiale": 12.975719679633869,
+    "lr": 0.1,
+    "arbres": [
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.44,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 0,
+                    "seuil": 0.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -6.186783509421104
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -6.3603798738086255
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.49,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -6.590878915302658
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -6.447839777673083
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.79,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.212551695830815
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.8306581366572923
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.94,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 1.0606609788023451
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 1.2493618421052617
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.44,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.42,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -5.738189762523987
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -5.586249316910669
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.7,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -5.8432402838703545
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -5.692135701866561
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.79,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.19129652624773325
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.7475923229915623
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.94,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.9545948809221112
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 1.1244256578947358
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.46,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -5.186354688251383
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -4.968303591462691
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.49,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -5.468394716238307
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -5.221046486316594
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.79,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.1721668736229599
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.6728330906924064
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.9363930729441259
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.8023155044403392
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.44,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 0,
+                    "seuil": 0.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -4.488147464828092
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -4.642105372956774
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.71,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -4.7325410218671
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -4.576574004787376
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.79,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.15495018626066362
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.6055497816231651
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.94,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.7704646802037033
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.9229223394599374
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.46,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -4.2045321903077575
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -4.0068075399030505
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.49,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -4.448301142427766
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -4.227446187161379
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.79,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.75,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.17379383368425372
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.3741631408433032
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.7627797562062251
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.6423985264929406
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.51,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.49,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -3.8167851428397683
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -3.490794018230734
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.52,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -4.369390656886196
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -3.808597775619431
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.79,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.11161282299368583
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.5164103782207226
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.94,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.6216012776062012
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.75846297442248
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.44,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.42,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -3.3935662041807273
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -3.2556603024435398
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.71,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -3.454321315521678
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -3.3153122080305577
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.79,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.75,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.18097294707644848
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.3113055140857054
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.6217135901312316
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.5136295442602654
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.46,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -3.0658698433048204
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -2.885330235486702
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.48,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -3.3266527361719356
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -3.0847745797490083
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.79,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.07792213712017697
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.4415732598545639
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.94,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.5012751275940549
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.6241362314900585
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.51,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.49,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -2.7870569007607933
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -2.4878050268805927
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.52,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -3.278542001670509
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -2.7756245936272155
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.79,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.75,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.18270329469800947
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.25955423997069677
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.5070554995913391
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.4100124179302594
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.44,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 0,
+                    "seuil": 0.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -2.328882654868963
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -2.463714845171415
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 0,
+                    "seuil": 0.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -2.5639694663792287
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -2.481986355865312
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.79,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.05190167566738299
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.3785887508987607
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.94,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.40403824985641235
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.5143309389784981
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.71,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.54,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -2.2176058999223116
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -2.290264249676261
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 4.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -2.1220700786433535
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -4.362585912564218
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.75,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.2596383957772349
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -0.02032550224636447
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.79,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.21688411893079623
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.38200914249513396
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.7,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.69,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -2.0234679898750616
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -2.2661521407742478
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 4.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -1.904433231647149
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -3.14962823668158
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.75,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.23367455619951122
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -0.01829295202172725
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.79,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.1951957070377173
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.34380822824562074
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.44,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.42,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -1.80667810551209
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -1.6821664647794035
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.49,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -1.9162353706689876
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -1.8152609101614952
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.75,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.21030710057956012
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -0.01646365681955433
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.79,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.1756761363339461
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.3094274054210579
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.51,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.49,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -1.653804080022072
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -1.3824986778360866
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.52,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -2.093238783986603
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -1.6364923965147917
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.75,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.18927639052160497
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -0.014817291137599487
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.79,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.15810852270055167
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.2784846648789525
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.47,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -1.4661480739066974
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -1.3151759750286551
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.48,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -1.9117173293047829
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -1.4744037649830144
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.75,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.1703487514694447
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -0.013335562023839832
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.85,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.18366118383203717
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.26937610290234165
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.7,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.69,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -1.3273636592452007
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -1.5469212195308928
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 4.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -1.2213742013165045
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -2.3420497058474927
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.75,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.15331387632250074
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -0.01200200582145545
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.94,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.1901090585708753
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.3045872906863355
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.54,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.52,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -1.1991323616217293
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -0.8970327345429133
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.55,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -1.6486905726576135
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -1.1933643490683523
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.79,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.024433708684942275
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.24834752401548782
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.97,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.21228635617203775
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -0.09911769719707775
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 1,
+                "seuil": 3.0,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.4,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -1.4520859292342922
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -1.0818936889035957
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.4,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.025901746889190287
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -1.0603370636537917
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.75,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.13553911782175657
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -0.03563655764085932
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.94,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.15296248584428612
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.25662323533425835
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 0,
+                "seuil": 0.0,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.41,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.2865272035756055
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -1.0349691782043757
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.9995337308020357
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -0.8214758687651942
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.79,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 3.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.032245852061730126
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.21125633430232063
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.97,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.17403379281223869
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -0.11486825101079678
+                    }
+                }
+            }
+        },
+        {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 0.74,
+            "gauche": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.7,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.69,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.8710136653142112
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -1.0658642481038338
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 4.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.7739180518199767
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -1.8003270071140083
+                    }
+                }
+            },
+            "droite": {
+                "feuille": false,
+                "feature": 2,
+                "seuil": 0.75,
+                "gauche": {
+                    "feuille": false,
+                    "feature": 1,
+                    "seuil": 4.0,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": -0.08222014624285347
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": -0.24262781570402758
+                    }
+                },
+                "droite": {
+                    "feuille": false,
+                    "feature": 2,
+                    "seuil": 0.94,
+                    "gauche": {
+                        "feuille": true,
+                        "valeur": 0.1229130603946623
+                    },
+                    "droite": {
+                        "feuille": true,
+                        "valeur": 0.21701179608705823
+                    }
+                }
+            }
+        }
+    ]
+}
