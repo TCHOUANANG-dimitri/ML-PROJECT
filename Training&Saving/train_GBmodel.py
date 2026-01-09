@@ -152,10 +152,18 @@ plt.grid(True, linestyle='--', alpha=0.7)
 plt.tight_layout()
 plt.show()
 # 4. Sauvegarde JSON
+export_data = {
+    "moyenne_initiale": float(gb_model.moyenne_initiale),
+    "lr": float(gb_model.lr),
+    "arbres": gb_model.arbres
+}
 
+chemin_sauvegarde = 'Artifacts/modele_ia.json'
 import os
-# Définir le chemin
-chemin_final = os.path.join(os.path.dirname(__file__), '..', 'Artifacts', 'modele_ia.json')
+import json 
+os.makedirs('Artifacts', exist_ok=True)
 
-# Utiliser la nouvelle fonction de la classe
-gb_model.save(chemin_final)
+with open(chemin_sauvegarde, 'w', encoding='utf-8') as f:
+    json.dump(export_data, f, indent=4, ensure_ascii=False)
+
+print(f"✅ Modèle sauvegardé avec succès dans : {chemin_sauvegarde}")
