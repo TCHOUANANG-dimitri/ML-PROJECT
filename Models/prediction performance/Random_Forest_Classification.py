@@ -174,7 +174,7 @@ class RandomForestClassification :
         Args:
             nom_fichier: Chemin du fichier de sauvegarde (ex: 'modele.json')
         """
-        if self.arbre is None:
+        if self.forest is None:
             raise ValueError("Aucun modèle à sauvegarder. Entraînez d'abord avec fit().")
         
         modele = {
