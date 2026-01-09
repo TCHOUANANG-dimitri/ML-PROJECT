@@ -134,12 +134,12 @@ class RandomForestClassification :
             x = X[i, :]
             predict_forest = np.array([]) 
 
-            for j in range (self.Nb_arbre) :    # fait une prediction d'une même instance sur chaque arbre
+            for j in range (self.nb_arbre) :    # fait une prediction d'une même instance sur chaque arbre
                 predict_forest = np.append(predict_forest, self.predict_one_tree(x, self.forest[j]))     # prediction de tous les arbres
                 
             # Décision de la foret
             index_yes = predict_forest == 1
-            if np.sum(index_yes) / self.Nb_arbre > 0.5:
+            if np.sum(index_yes) / self.nb_arbre > 0.5:
                 decision = 1
             else:
                 decision = 0
