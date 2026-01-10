@@ -1,0 +1,207 @@
+{
+  "arbre": {
+    "feuille": false,
+    "feature": 2,
+    "seuil": 9.165,
+    "gauche": {
+      "feuille": false,
+      "feature": 0,
+      "seuil": 0.8467980295566502,
+      "gauche": {
+        "feuille": false,
+        "feature": 3,
+        "seuil": 10.515,
+        "gauche": {
+          "feuille": false,
+          "feature": 2,
+          "seuil": 8.875,
+          "gauche": {
+            "feuille": true,
+            "valeur": 0.009442870632672332,
+            "n_echantillons": 1059,
+            "variance": 0.009353702826886945
+          },
+          "droite": {
+            "feuille": false,
+            "feature": 0,
+            "seuil": 0.7437177280550775,
+            "gauche": {
+              "feuille": true,
+              "valeur": 0.06349206349206349,
+              "n_echantillons": 63,
+              "variance": 0.05946082136558326
+            },
+            "droite": {
+              "feuille": true,
+              "valeur": 0.8461538461538461,
+              "n_echantillons": 13,
+              "variance": 0.1301775147928994
+            },
+            "gain": 0.08685702955093531,
+            "n_echantillons": 76
+          },
+          "gain": 0.0022064266336252573,
+          "n_echantillons": 1135
+        },
+        "droite": {
+          "feuille": false,
+          "feature": 0,
+          "seuil": 0.7517165005537099,
+          "gauche": {
+            "feuille": false,
+            "feature": 1,
+            "seuil": 4.5,
+            "gauche": {
+              "feuille": true,
+              "valeur": 0.1702127659574468,
+              "n_echantillons": 47,
+              "variance": 0.14124038026256222
+            },
+            "droite": {
+              "feuille": true,
+              "valeur": 0.7142857142857143,
+              "n_echantillons": 7,
+              "variance": 0.20408163265306126
+            },
+            "gain": 0.03339816795293557,
+            "n_echantillons": 54
+          },
+          "droite": {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 7.885,
+            "gauche": {
+              "feuille": true,
+              "valeur": 0.0,
+              "n_echantillons": 1,
+              "variance": 0.0
+            },
+            "droite": {
+              "feuille": true,
+              "valeur": 1.0,
+              "n_echantillons": 19,
+              "variance": 0.0
+            },
+            "gain": 0.047500000000000014,
+            "n_echantillons": 20
+          },
+          "gain": 0.09921340259178099,
+          "n_echantillons": 74
+        },
+        "gain": 0.009678373629146399,
+        "n_echantillons": 1209
+      },
+      "droite": {
+        "feuille": true,
+        "valeur": 1.0,
+        "n_echantillons": 23,
+        "variance": 0.0
+      },
+      "gain": 0.01663355496619008,
+      "n_echantillons": 1232
+    },
+    "droite": {
+      "feuille": false,
+      "feature": 0,
+      "seuil": 0.5485083189902467,
+      "gauche": {
+        "feuille": true,
+        "valeur": 0.0,
+        "n_echantillons": 125,
+        "variance": 0.0
+      },
+      "droite": {
+        "feuille": false,
+        "feature": 3,
+        "seuil": 8.93,
+        "gauche": {
+          "feuille": false,
+          "feature": 0,
+          "seuil": 0.7788235294117647,
+          "gauche": {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 10.705,
+            "gauche": {
+              "feuille": true,
+              "valeur": 0.0875,
+              "n_echantillons": 80,
+              "variance": 0.07984375000000002
+            },
+            "droite": {
+              "feuille": true,
+              "valeur": 0.5,
+              "n_echantillons": 18,
+              "variance": 0.25
+            },
+            "gain": 0.02551280716368176,
+            "n_echantillons": 98
+          },
+          "droite": {
+            "feuille": false,
+            "feature": 2,
+            "seuil": 9.635000000000002,
+            "gauche": {
+              "feuille": true,
+              "valeur": 0.0,
+              "n_echantillons": 1,
+              "variance": 0.0
+            },
+            "droite": {
+              "feuille": true,
+              "valeur": 0.95,
+              "n_echantillons": 20,
+              "variance": 0.047500000000000014
+            },
+            "gain": 0.04092970521541949,
+            "n_echantillons": 21
+          },
+          "gain": 0.07990423059980295,
+          "n_echantillons": 119
+        },
+        "droite": {
+          "feuille": false,
+          "feature": 0,
+          "seuil": 0.74798128342246,
+          "gauche": {
+            "feuille": false,
+            "feature": 3,
+            "seuil": 11.355,
+            "gauche": {
+              "feuille": true,
+              "valeur": 0.4945652173913043,
+              "n_echantillons": 184,
+              "variance": 0.24997046313799623
+            },
+            "droite": {
+              "feuille": true,
+              "valeur": 0.9759036144578314,
+              "n_echantillons": 415,
+              "variance": 0.02351574974597184
+            },
+            "gain": 0.049307534773259235,
+            "n_echantillons": 599
+          },
+          "droite": {
+            "feuille": true,
+            "valeur": 0.9994003897466647,
+            "n_echantillons": 6671,
+            "variance": 0.0005992507208794273
+          },
+          "gain": 0.0022199113740493485,
+          "n_echantillons": 7270
+        },
+        "gain": 0.00756959558204915,
+        "n_echantillons": 7389
+      },
+      "gain": 0.015524072047039612,
+      "n_echantillons": 7514
+    },
+    "gain": 0.09651075167396894,
+    "n_echantillons": 8746
+  },
+  "profondeur_max": 5,
+  "min_echantillons": 2,
+  "min_variance": 0.01,
+  "n_features": 4
+}

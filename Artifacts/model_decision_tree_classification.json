@@ -1,19 +1,26 @@
 {
   "racine": {
-    "feature": 0,
-    "seuil": 0.7476190476190476,
+    "feature": 3,
+    "seuil": 9.88,
     "decision": 1,
     "arbre enfant de gauche": {
-      "feature": 2,
-      "seuil": 11.25,
+      "feature": 0,
+      "seuil": 0.7448275862068966,
       "decision": 0,
       "arbre enfant de gauche": {
-        "feature": 3,
-        "seuil": 8.43,
+        "feature": 2,
+        "seuil": 7.93,
         "decision": 0,
         "arbre enfant de gauche": {
-          "feature": 3,
-          "seuil": 7.57,
+          "feature": null,
+          "seuil": null,
+          "decision": 0,
+          "arbre enfant de gauche": null,
+          "arbre enfant de droite": null
+        },
+        "arbre enfant de droite": {
+          "feature": 0,
+          "seuil": 0.5476190476190477,
           "decision": 0,
           "arbre enfant de gauche": {
             "feature": null,
@@ -23,8 +30,8 @@
             "arbre enfant de droite": null
           },
           "arbre enfant de droite": {
-            "feature": 0,
-            "seuil": 0.6216867469879518,
+            "feature": 3,
+            "seuil": 7.82,
             "decision": 0,
             "arbre enfant de gauche": {
               "feature": null,
@@ -34,8 +41,229 @@
               "arbre enfant de droite": null
             },
             "arbre enfant de droite": {
-              "feature": 2,
-              "seuil": 7.92,
+              "feature": 1,
+              "seuil": 3.0,
+              "decision": 0,
+              "arbre enfant de gauche": {
+                "feature": 2,
+                "seuil": 11.48,
+                "decision": 0,
+                "arbre enfant de gauche": {
+                  "feature": 2,
+                  "seuil": 8.08,
+                  "decision": 0,
+                  "arbre enfant de gauche": {
+                    "feature": 3,
+                    "seuil": 8.77,
+                    "decision": 1,
+                    "arbre enfant de gauche": {
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 1,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
+                    },
+                    "arbre enfant de droite": {
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 0,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
+                    }
+                  },
+                  "arbre enfant de droite": {
+                    "feature": 2,
+                    "seuil": 8.88,
+                    "decision": 0,
+                    "arbre enfant de gauche": {
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 0,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
+                    },
+                    "arbre enfant de droite": {
+                      "feature": 0,
+                      "seuil": 0.7166666666666667,
+                      "decision": 0,
+                      "arbre enfant de gauche": {
+                        "feature": 0,
+                        "seuil": 0.6380952380952379,
+                        "decision": 0,
+                        "arbre enfant de gauche": null,
+                        "arbre enfant de droite": null
+                      },
+                      "arbre enfant de droite": {
+                        "feature": 2,
+                        "seuil": 10.36,
+                        "decision": 0,
+                        "arbre enfant de gauche": null,
+                        "arbre enfant de droite": null
+                      }
+                    }
+                  }
+                },
+                "arbre enfant de droite": {
+                  "feature": 3,
+                  "seuil": 9.7,
+                  "decision": 0,
+                  "arbre enfant de gauche": {
+                    "feature": 2,
+                    "seuil": 11.64,
+                    "decision": 1,
+                    "arbre enfant de gauche": {
+                      "feature": 0,
+                      "seuil": 0.7261904761904762,
+                      "decision": 0,
+                      "arbre enfant de gauche": {
+                        "feature": null,
+                        "seuil": null,
+                        "decision": 0,
+                        "arbre enfant de gauche": null,
+                        "arbre enfant de droite": null
+                      },
+                      "arbre enfant de droite": {
+                        "feature": null,
+                        "seuil": null,
+                        "decision": 1,
+                        "arbre enfant de gauche": null,
+                        "arbre enfant de droite": null
+                      }
+                    },
+                    "arbre enfant de droite": {
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 1,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
+                    }
+                  },
+                  "arbre enfant de droite": {
+                    "feature": null,
+                    "seuil": null,
+                    "decision": 0,
+                    "arbre enfant de gauche": null,
+                    "arbre enfant de droite": null
+                  }
+                }
+              },
+              "arbre enfant de droite": {
+                "feature": 2,
+                "seuil": 10.7,
+                "decision": 0,
+                "arbre enfant de gauche": {
+                  "feature": 0,
+                  "seuil": 0.7139534883720929,
+                  "decision": 0,
+                  "arbre enfant de gauche": {
+                    "feature": 2,
+                    "seuil": 10.22,
+                    "decision": 0,
+                    "arbre enfant de gauche": {
+                      "feature": 2,
+                      "seuil": 10.07,
+                      "decision": 0,
+                      "arbre enfant de gauche": {
+                        "feature": 3,
+                        "seuil": 9.52,
+                        "decision": 0,
+                        "arbre enfant de gauche": null,
+                        "arbre enfant de droite": null
+                      },
+                      "arbre enfant de droite": {
+                        "feature": null,
+                        "seuil": null,
+                        "decision": 1,
+                        "arbre enfant de gauche": null,
+                        "arbre enfant de droite": null
+                      }
+                    },
+                    "arbre enfant de droite": {
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 0,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
+                    }
+                  },
+                  "arbre enfant de droite": {
+                    "feature": 3,
+                    "seuil": 9.75,
+                    "decision": 1,
+                    "arbre enfant de gauche": {
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 1,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
+                    },
+                    "arbre enfant de droite": {
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 0,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
+                    }
+                  }
+                },
+                "arbre enfant de droite": {
+                  "feature": 0,
+                  "seuil": 0.6137931034482759,
+                  "decision": 1,
+                  "arbre enfant de gauche": {
+                    "feature": 0,
+                    "seuil": 0.5927710843373494,
+                    "decision": 1,
+                    "arbre enfant de gauche": {
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 1,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
+                    },
+                    "arbre enfant de droite": {
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 0,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
+                    }
+                  },
+                  "arbre enfant de droite": {
+                    "feature": null,
+                    "seuil": null,
+                    "decision": 1,
+                    "arbre enfant de gauche": null,
+                    "arbre enfant de droite": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "arbre enfant de droite": {
+        "feature": 2,
+        "seuil": 8.77,
+        "decision": 1,
+        "arbre enfant de gauche": {
+          "feature": 2,
+          "seuil": 7.61,
+          "decision": 0,
+          "arbre enfant de gauche": {
+            "feature": null,
+            "seuil": null,
+            "decision": 0,
+            "arbre enfant de gauche": null,
+            "arbre enfant de droite": null
+          },
+          "arbre enfant de droite": {
+            "feature": 3,
+            "seuil": 8.24,
+            "decision": 0,
+            "arbre enfant de gauche": {
+              "feature": 0,
+              "seuil": 0.8404761904761905,
               "decision": 0,
               "arbre enfant de gauche": {
                 "feature": null,
@@ -45,76 +273,172 @@
                 "arbre enfant de droite": null
               },
               "arbre enfant de droite": {
-                "feature": 2,
-                "seuil": 7.95,
+                "feature": null,
+                "seuil": null,
+                "decision": 1,
+                "arbre enfant de gauche": null,
+                "arbre enfant de droite": null
+              }
+            },
+            "arbre enfant de droite": {
+              "feature": null,
+              "seuil": null,
+              "decision": 1,
+              "arbre enfant de gauche": null,
+              "arbre enfant de droite": null
+            }
+          }
+        },
+        "arbre enfant de droite": {
+          "feature": 0,
+          "seuil": 0.8363636363636363,
+          "decision": 1,
+          "arbre enfant de gauche": {
+            "feature": 2,
+            "seuil": 10.39,
+            "decision": 1,
+            "arbre enfant de gauche": {
+              "feature": 3,
+              "seuil": 8.65,
+              "decision": 1,
+              "arbre enfant de gauche": {
+                "feature": null,
+                "seuil": null,
                 "decision": 0,
+                "arbre enfant de gauche": null,
+                "arbre enfant de droite": null
+              },
+              "arbre enfant de droite": {
+                "feature": 0,
+                "seuil": 0.75,
+                "decision": 1,
                 "arbre enfant de gauche": {
-                  "feature": null,
-                  "seuil": null,
-                  "decision": 1,
-                  "arbre enfant de gauche": null,
-                  "arbre enfant de droite": null
-                },
-                "arbre enfant de droite": {
-                  "feature": 1,
-                  "seuil": 3.0,
+                  "feature": 0,
+                  "seuil": 0.7465116279069768,
                   "decision": 0,
                   "arbre enfant de gauche": {
+                    "feature": null,
+                    "seuil": null,
+                    "decision": 1,
+                    "arbre enfant de gauche": null,
+                    "arbre enfant de droite": null
+                  },
+                  "arbre enfant de droite": {
                     "feature": null,
                     "seuil": null,
                     "decision": 0,
                     "arbre enfant de gauche": null,
                     "arbre enfant de droite": null
-                  },
-                  "arbre enfant de droite": {
-                    "feature": 2,
-                    "seuil": 9.93,
-                    "decision": 0,
+                  }
+                },
+                "arbre enfant de droite": {
+                  "feature": 1,
+                  "seuil": 4.0,
+                  "decision": 1,
+                  "arbre enfant de gauche": {
+                    "feature": 0,
+                    "seuil": 0.8190476190476189,
+                    "decision": 1,
                     "arbre enfant de gauche": {
-                      "feature": 3,
-                      "seuil": 7.58,
-                      "decision": 0,
-                      "arbre enfant de gauche": {
-                        "feature": null,
-                        "seuil": null,
-                        "decision": 1,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      },
-                      "arbre enfant de droite": {
-                        "feature": null,
-                        "seuil": null,
-                        "decision": 0,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      }
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 1,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
                     },
                     "arbre enfant de droite": {
-                      "feature": 0,
-                      "seuil": 0.6746987951807228,
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 0,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
+                    }
+                  },
+                  "arbre enfant de droite": {
+                    "feature": 0,
+                    "seuil": 0.8,
+                    "decision": 0,
+                    "arbre enfant de gauche": {
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 0,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
+                    },
+                    "arbre enfant de droite": {
+                      "feature": null,
+                      "seuil": null,
                       "decision": 1,
-                      "arbre enfant de gauche": {
-                        "feature": null,
-                        "seuil": null,
-                        "decision": 1,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      },
-                      "arbre enfant de droite": {
-                        "feature": null,
-                        "seuil": null,
-                        "decision": 0,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      }
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
                     }
                   }
                 }
               }
+            },
+            "arbre enfant de droite": {
+              "feature": 0,
+              "seuil": 0.7476190476190476,
+              "decision": 1,
+              "arbre enfant de gauche": {
+                "feature": 2,
+                "seuil": 10.77,
+                "decision": 0,
+                "arbre enfant de gauche": {
+                  "feature": null,
+                  "seuil": null,
+                  "decision": 0,
+                  "arbre enfant de gauche": null,
+                  "arbre enfant de droite": null
+                },
+                "arbre enfant de droite": {
+                  "feature": 2,
+                  "seuil": 11.68,
+                  "decision": 1,
+                  "arbre enfant de gauche": {
+                    "feature": null,
+                    "seuil": null,
+                    "decision": 1,
+                    "arbre enfant de gauche": null,
+                    "arbre enfant de droite": null
+                  },
+                  "arbre enfant de droite": {
+                    "feature": null,
+                    "seuil": null,
+                    "decision": 0,
+                    "arbre enfant de gauche": null,
+                    "arbre enfant de droite": null
+                  }
+                }
+              },
+              "arbre enfant de droite": {
+                "feature": null,
+                "seuil": null,
+                "decision": 1,
+                "arbre enfant de gauche": null,
+                "arbre enfant de droite": null
+              }
             }
+          },
+          "arbre enfant de droite": {
+            "feature": null,
+            "seuil": null,
+            "decision": 1,
+            "arbre enfant de gauche": null,
+            "arbre enfant de droite": null
           }
-        },
-        "arbre enfant de droite": {
+        }
+      }
+    },
+    "arbre enfant de droite": {
+      "feature": 0,
+      "seuil": 0.7476190476190476,
+      "decision": 1,
+      "arbre enfant de gauche": {
+        "feature": 2,
+        "seuil": 12.06,
+        "decision": 1,
+        "arbre enfant de gauche": {
           "feature": 0,
           "seuil": 0.55,
           "decision": 0,
@@ -126,336 +450,31 @@
             "arbre enfant de droite": null
           },
           "arbre enfant de droite": {
-            "feature": 1,
-            "seuil": 3.0,
-            "decision": 0,
-            "arbre enfant de gauche": {
-              "feature": 3,
-              "seuil": 10.82,
-              "decision": 0,
-              "arbre enfant de gauche": {
-                "feature": 2,
-                "seuil": 8.07,
-                "decision": 0,
-                "arbre enfant de gauche": {
-                  "feature": null,
-                  "seuil": null,
-                  "decision": 0,
-                  "arbre enfant de gauche": null,
-                  "arbre enfant de droite": null
-                },
-                "arbre enfant de droite": {
-                  "feature": 2,
-                  "seuil": 8.08,
-                  "decision": 0,
-                  "arbre enfant de gauche": {
-                    "feature": null,
-                    "seuil": null,
-                    "decision": 1,
-                    "arbre enfant de gauche": null,
-                    "arbre enfant de droite": null
-                  },
-                  "arbre enfant de droite": {
-                    "feature": 3,
-                    "seuil": 9.12,
-                    "decision": 0,
-                    "arbre enfant de gauche": {
-                      "feature": 3,
-                      "seuil": 8.46,
-                      "decision": 0,
-                      "arbre enfant de gauche": {
-                        "feature": 0,
-                        "seuil": 0.6380952380952379,
-                        "decision": 0,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      },
-                      "arbre enfant de droite": {
-                        "feature": null,
-                        "seuil": null,
-                        "decision": 0,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      }
-                    },
-                    "arbre enfant de droite": {
-                      "feature": 3,
-                      "seuil": 9.13,
-                      "decision": 0,
-                      "arbre enfant de gauche": {
-                        "feature": null,
-                        "seuil": null,
-                        "decision": 1,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      },
-                      "arbre enfant de droite": {
-                        "feature": 0,
-                        "seuil": 0.6214285714285714,
-                        "decision": 0,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      }
-                    }
-                  }
-                }
-              },
-              "arbre enfant de droite": {
-                "feature": 0,
-                "seuil": 0.7047619047619048,
-                "decision": 0,
-                "arbre enfant de gauche": {
-                  "feature": 3,
-                  "seuil": 12.27,
-                  "decision": 1,
-                  "arbre enfant de gauche": {
-                    "feature": 0,
-                    "seuil": 0.5761904761904761,
-                    "decision": 0,
-                    "arbre enfant de gauche": {
-                      "feature": null,
-                      "seuil": null,
-                      "decision": 0,
-                      "arbre enfant de gauche": null,
-                      "arbre enfant de droite": null
-                    },
-                    "arbre enfant de droite": {
-                      "feature": 3,
-                      "seuil": 11.64,
-                      "decision": 1,
-                      "arbre enfant de gauche": {
-                        "feature": 3,
-                        "seuil": 11.25,
-                        "decision": 1,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      },
-                      "arbre enfant de droite": {
-                        "feature": null,
-                        "seuil": null,
-                        "decision": 0,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      }
-                    }
-                  },
-                  "arbre enfant de droite": {
-                    "feature": null,
-                    "seuil": null,
-                    "decision": 1,
-                    "arbre enfant de gauche": null,
-                    "arbre enfant de droite": null
-                  }
-                },
-                "arbre enfant de droite": {
-                  "feature": null,
-                  "seuil": null,
-                  "decision": 0,
-                  "arbre enfant de gauche": null,
-                  "arbre enfant de droite": null
-                }
-              }
-            },
-            "arbre enfant de droite": {
-              "feature": 2,
-              "seuil": 7.98,
-              "decision": 0,
-              "arbre enfant de gauche": {
-                "feature": 3,
-                "seuil": 10.56,
-                "decision": 0,
-                "arbre enfant de gauche": {
-                  "feature": null,
-                  "seuil": null,
-                  "decision": 0,
-                  "arbre enfant de gauche": null,
-                  "arbre enfant de droite": null
-                },
-                "arbre enfant de droite": {
-                  "feature": 1,
-                  "seuil": 4.0,
-                  "decision": 0,
-                  "arbre enfant de gauche": {
-                    "feature": null,
-                    "seuil": null,
-                    "decision": 0,
-                    "arbre enfant de gauche": null,
-                    "arbre enfant de droite": null
-                  },
-                  "arbre enfant de droite": {
-                    "feature": null,
-                    "seuil": null,
-                    "decision": 1,
-                    "arbre enfant de gauche": null,
-                    "arbre enfant de droite": null
-                  }
-                }
-              },
-              "arbre enfant de droite": {
-                "feature": 3,
-                "seuil": 11.25,
-                "decision": 1,
-                "arbre enfant de gauche": {
-                  "feature": 2,
-                  "seuil": 10.6,
-                  "decision": 0,
-                  "arbre enfant de gauche": {
-                    "feature": 3,
-                    "seuil": 8.68,
-                    "decision": 0,
-                    "arbre enfant de gauche": {
-                      "feature": 3,
-                      "seuil": 8.44,
-                      "decision": 0,
-                      "arbre enfant de gauche": {
-                        "feature": null,
-                        "seuil": null,
-                        "decision": 1,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      },
-                      "arbre enfant de droite": {
-                        "feature": null,
-                        "seuil": null,
-                        "decision": 0,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      }
-                    },
-                    "arbre enfant de droite": {
-                      "feature": 3,
-                      "seuil": 8.74,
-                      "decision": 0,
-                      "arbre enfant de gauche": {
-                        "feature": null,
-                        "seuil": null,
-                        "decision": 1,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      },
-                      "arbre enfant de droite": {
-                        "feature": 3,
-                        "seuil": 8.89,
-                        "decision": 0,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      }
-                    }
-                  },
-                  "arbre enfant de droite": {
-                    "feature": 1,
-                    "seuil": 4.0,
-                    "decision": 1,
-                    "arbre enfant de gauche": {
-                      "feature": 2,
-                      "seuil": 10.98,
-                      "decision": 1,
-                      "arbre enfant de gauche": {
-                        "feature": 2,
-                        "seuil": 10.86,
-                        "decision": 1,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      },
-                      "arbre enfant de droite": {
-                        "feature": null,
-                        "seuil": null,
-                        "decision": 1,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      }
-                    },
-                    "arbre enfant de droite": {
-                      "feature": null,
-                      "seuil": null,
-                      "decision": 1,
-                      "arbre enfant de gauche": null,
-                      "arbre enfant de droite": null
-                    }
-                  }
-                },
-                "arbre enfant de droite": {
-                  "feature": 0,
-                  "seuil": 0.6164705882352941,
-                  "decision": 1,
-                  "arbre enfant de gauche": {
-                    "feature": 0,
-                    "seuil": 0.5952380952380952,
-                    "decision": 1,
-                    "arbre enfant de gauche": {
-                      "feature": null,
-                      "seuil": null,
-                      "decision": 1,
-                      "arbre enfant de gauche": null,
-                      "arbre enfant de droite": null
-                    },
-                    "arbre enfant de droite": {
-                      "feature": 2,
-                      "seuil": 9.92,
-                      "decision": 0,
-                      "arbre enfant de gauche": {
-                        "feature": null,
-                        "seuil": null,
-                        "decision": 1,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      },
-                      "arbre enfant de droite": {
-                        "feature": null,
-                        "seuil": null,
-                        "decision": 0,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      }
-                    }
-                  },
-                  "arbre enfant de droite": {
-                    "feature": null,
-                    "seuil": null,
-                    "decision": 1,
-                    "arbre enfant de gauche": null,
-                    "arbre enfant de droite": null
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "arbre enfant de droite": {
-        "feature": 2,
-        "seuil": 12.31,
-        "decision": 1,
-        "arbre enfant de gauche": {
-          "feature": 0,
-          "seuil": 0.5333333333333333,
-          "decision": 1,
-          "arbre enfant de gauche": {
-            "feature": null,
-            "seuil": null,
-            "decision": 0,
-            "arbre enfant de gauche": null,
-            "arbre enfant de droite": null
-          },
-          "arbre enfant de droite": {
             "feature": 3,
-            "seuil": 11.91,
+            "seuil": 11.78,
             "decision": 1,
             "arbre enfant de gauche": {
               "feature": 1,
               "seuil": 3.0,
-              "decision": 1,
+              "decision": 0,
               "arbre enfant de gauche": {
-                "feature": 0,
-                "seuil": 0.7261904761904762,
+                "feature": 3,
+                "seuil": 11.15,
                 "decision": 0,
                 "arbre enfant de gauche": {
-                  "feature": 2,
-                  "seuil": 11.73,
+                  "feature": 3,
+                  "seuil": 10.58,
                   "decision": 0,
                   "arbre enfant de gauche": {
-                    "feature": 2,
-                    "seuil": 11.27,
+                    "feature": null,
+                    "seuil": null,
+                    "decision": 0,
+                    "arbre enfant de gauche": null,
+                    "arbre enfant de droite": null
+                  },
+                  "arbre enfant de droite": {
+                    "feature": 3,
+                    "seuil": 10.59,
                     "decision": 0,
                     "arbre enfant de gauche": {
                       "feature": null,
@@ -471,96 +490,204 @@
                       "arbre enfant de gauche": null,
                       "arbre enfant de droite": null
                     }
-                  },
-                  "arbre enfant de droite": {
-                    "feature": 0,
-                    "seuil": 0.5833333333333334,
+                  }
+                },
+                "arbre enfant de droite": {
+                  "feature": 2,
+                  "seuil": 10.76,
+                  "decision": 0,
+                  "arbre enfant de gauche": {
+                    "feature": 3,
+                    "seuil": 11.47,
                     "decision": 0,
                     "arbre enfant de gauche": {
-                      "feature": null,
-                      "seuil": null,
-                      "decision": 1,
-                      "arbre enfant de gauche": null,
-                      "arbre enfant de droite": null
-                    },
-                    "arbre enfant de droite": {
-                      "feature": 3,
-                      "seuil": 10.27,
+                      "feature": 0,
+                      "seuil": 0.7047619047619048,
                       "decision": 0,
                       "arbre enfant de gauche": {
+                        "feature": 3,
+                        "seuil": 11.33,
+                        "decision": 1,
+                        "arbre enfant de gauche": null,
+                        "arbre enfant de droite": null
+                      },
+                      "arbre enfant de droite": {
                         "feature": null,
                         "seuil": null,
                         "decision": 0,
                         "arbre enfant de gauche": null,
                         "arbre enfant de droite": null
-                      },
-                      "arbre enfant de droite": {
-                        "feature": 3,
-                        "seuil": 11.32,
-                        "decision": 1,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
                       }
+                    },
+                    "arbre enfant de droite": {
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 0,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
                     }
-                  }
-                },
-                "arbre enfant de droite": {
-                  "feature": 0,
-                  "seuil": 0.7452380952380953,
-                  "decision": 1,
-                  "arbre enfant de gauche": {
-                    "feature": null,
-                    "seuil": null,
-                    "decision": 1,
-                    "arbre enfant de gauche": null,
-                    "arbre enfant de droite": null
                   },
                   "arbre enfant de droite": {
-                    "feature": null,
-                    "seuil": null,
-                    "decision": 0,
-                    "arbre enfant de gauche": null,
-                    "arbre enfant de droite": null
-                  }
-                }
-              },
-              "arbre enfant de droite": {
-                "feature": 3,
-                "seuil": 10.5,
-                "decision": 1,
-                "arbre enfant de gauche": {
-                  "feature": 0,
-                  "seuil": 0.6976744186046512,
-                  "decision": 1,
-                  "arbre enfant de gauche": {
                     "feature": 3,
-                    "seuil": 9.93,
+                    "seuil": 11.68,
                     "decision": 1,
                     "arbre enfant de gauche": {
-                      "feature": 3,
-                      "seuil": 9.04,
+                      "feature": 0,
+                      "seuil": 0.6333333333333333,
                       "decision": 1,
                       "arbre enfant de gauche": {
                         "feature": null,
                         "seuil": null,
                         "decision": 1,
+                        "arbre enfant de gauche": null,
+                        "arbre enfant de droite": null
+                      },
+                      "arbre enfant de droite": {
+                        "feature": 0,
+                        "seuil": 0.7238095238095238,
+                        "decision": 1,
+                        "arbre enfant de gauche": null,
+                        "arbre enfant de droite": null
+                      }
+                    },
+                    "arbre enfant de droite": {
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 0,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
+                    }
+                  }
+                }
+              },
+              "arbre enfant de droite": {
+                "feature": 2,
+                "seuil": 7.89,
+                "decision": 1,
+                "arbre enfant de gauche": {
+                  "feature": 3,
+                  "seuil": 10.97,
+                  "decision": 0,
+                  "arbre enfant de gauche": {
+                    "feature": null,
+                    "seuil": null,
+                    "decision": 0,
+                    "arbre enfant de gauche": null,
+                    "arbre enfant de droite": null
+                  },
+                  "arbre enfant de droite": {
+                    "feature": 0,
+                    "seuil": 0.5785714285714286,
+                    "decision": 0,
+                    "arbre enfant de gauche": {
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 0,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
+                    },
+                    "arbre enfant de droite": {
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 1,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
+                    }
+                  }
+                },
+                "arbre enfant de droite": {
+                  "feature": 3,
+                  "seuil": 11.25,
+                  "decision": 1,
+                  "arbre enfant de gauche": {
+                    "feature": 0,
+                    "seuil": 0.5717647058823531,
+                    "decision": 1,
+                    "arbre enfant de gauche": {
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 1,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
+                    },
+                    "arbre enfant de droite": {
+                      "feature": 2,
+                      "seuil": 8.33,
+                      "decision": 1,
+                      "arbre enfant de gauche": {
+                        "feature": null,
+                        "seuil": null,
+                        "decision": 1,
+                        "arbre enfant de gauche": null,
+                        "arbre enfant de droite": null
+                      },
+                      "arbre enfant de droite": {
+                        "feature": 3,
+                        "seuil": 10.71,
+                        "decision": 1,
+                        "arbre enfant de gauche": null,
+                        "arbre enfant de droite": null
+                      }
+                    }
+                  },
+                  "arbre enfant de droite": {
+                    "feature": null,
+                    "seuil": null,
+                    "decision": 1,
+                    "arbre enfant de gauche": null,
+                    "arbre enfant de droite": null
+                  }
+                }
+              }
+            },
+            "arbre enfant de droite": {
+              "feature": 3,
+              "seuil": 12.37,
+              "decision": 1,
+              "arbre enfant de gauche": {
+                "feature": 2,
+                "seuil": 8.36,
+                "decision": 1,
+                "arbre enfant de gauche": {
+                  "feature": null,
+                  "seuil": null,
+                  "decision": 0,
+                  "arbre enfant de gauche": null,
+                  "arbre enfant de droite": null
+                },
+                "arbre enfant de droite": {
+                  "feature": 3,
+                  "seuil": 12.33,
+                  "decision": 1,
+                  "arbre enfant de gauche": {
+                    "feature": 0,
+                    "seuil": 0.6141176470588235,
+                    "decision": 1,
+                    "arbre enfant de gauche": {
+                      "feature": null,
+                      "seuil": null,
+                      "decision": 1,
+                      "arbre enfant de gauche": null,
+                      "arbre enfant de droite": null
+                    },
+                    "arbre enfant de droite": {
+                      "feature": 0,
+                      "seuil": 0.6164705882352941,
+                      "decision": 1,
+                      "arbre enfant de gauche": {
+                        "feature": null,
+                        "seuil": null,
+                        "decision": 0,
                         "arbre enfant de gauche": null,
                         "arbre enfant de droite": null
                       },
                       "arbre enfant de droite": {
                         "feature": 1,
-                        "seuil": 4.0,
-                        "decision": 0,
+                        "seuil": 3.0,
+                        "decision": 1,
                         "arbre enfant de gauche": null,
                         "arbre enfant de droite": null
                       }
-                    },
-                    "arbre enfant de droite": {
-                      "feature": null,
-                      "seuil": null,
-                      "decision": 1,
-                      "arbre enfant de gauche": null,
-                      "arbre enfant de droite": null
                     }
                   },
                   "arbre enfant de droite": {
@@ -570,22 +697,15 @@
                     "arbre enfant de gauche": null,
                     "arbre enfant de droite": null
                   }
-                },
-                "arbre enfant de droite": {
-                  "feature": null,
-                  "seuil": null,
-                  "decision": 1,
-                  "arbre enfant de gauche": null,
-                  "arbre enfant de droite": null
                 }
+              },
+              "arbre enfant de droite": {
+                "feature": null,
+                "seuil": null,
+                "decision": 1,
+                "arbre enfant de gauche": null,
+                "arbre enfant de droite": null
               }
-            },
-            "arbre enfant de droite": {
-              "feature": null,
-              "seuil": null,
-              "decision": 1,
-              "arbre enfant de gauche": null,
-              "arbre enfant de droite": null
             }
           }
         },
@@ -596,52 +716,33 @@
           "arbre enfant de gauche": null,
           "arbre enfant de droite": null
         }
-      }
-    },
-    "arbre enfant de droite": {
-      "feature": 2,
-      "seuil": 8.77,
-      "decision": 1,
-      "arbre enfant de gauche": {
+      },
+      "arbre enfant de droite": {
         "feature": 2,
-        "seuil": 7.47,
-        "decision": 0,
+        "seuil": 9.24,
+        "decision": 1,
         "arbre enfant de gauche": {
-          "feature": null,
-          "seuil": null,
-          "decision": 0,
-          "arbre enfant de gauche": null,
-          "arbre enfant de droite": null
-        },
-        "arbre enfant de droite": {
-          "feature": 0,
-          "seuil": 0.8404761904761905,
-          "decision": 0,
+          "feature": 2,
+          "seuil": 7.83,
+          "decision": 1,
           "arbre enfant de gauche": {
-            "feature": 3,
-            "seuil": 8.24,
+            "feature": null,
+            "seuil": null,
             "decision": 0,
+            "arbre enfant de gauche": null,
+            "arbre enfant de droite": null
+          },
+          "arbre enfant de droite": {
+            "feature": 3,
+            "seuil": 10.09,
+            "decision": 1,
             "arbre enfant de gauche": {
-              "feature": null,
-              "seuil": null,
-              "decision": 0,
-              "arbre enfant de gauche": null,
-              "arbre enfant de droite": null
-            },
-            "arbre enfant de droite": {
               "feature": 0,
-              "seuil": 0.7581395348837209,
+              "seuil": 0.8209302325581396,
               "decision": 1,
               "arbre enfant de gauche": {
-                "feature": null,
-                "seuil": null,
-                "decision": 1,
-                "arbre enfant de gauche": null,
-                "arbre enfant de droite": null
-              },
-              "arbre enfant de droite": {
                 "feature": 0,
-                "seuil": 0.8,
+                "seuil": 0.7659090909090909,
                 "decision": 0,
                 "arbre enfant de gauche": {
                   "feature": null,
@@ -651,92 +752,15 @@
                   "arbre enfant de droite": null
                 },
                 "arbre enfant de droite": {
-                  "feature": null,
-                  "seuil": null,
-                  "decision": 1,
-                  "arbre enfant de gauche": null,
-                  "arbre enfant de droite": null
-                }
-              }
-            }
-          },
-          "arbre enfant de droite": {
-            "feature": null,
-            "seuil": null,
-            "decision": 1,
-            "arbre enfant de gauche": null,
-            "arbre enfant de droite": null
-          }
-        }
-      },
-      "arbre enfant de droite": {
-        "feature": 2,
-        "seuil": 9.79,
-        "decision": 1,
-        "arbre enfant de gauche": {
-          "feature": 3,
-          "seuil": 8.65,
-          "decision": 1,
-          "arbre enfant de gauche": {
-            "feature": null,
-            "seuil": null,
-            "decision": 0,
-            "arbre enfant de gauche": null,
-            "arbre enfant de droite": null
-          },
-          "arbre enfant de droite": {
-            "feature": 0,
-            "seuil": 0.8227272727272728,
-            "decision": 1,
-            "arbre enfant de gauche": {
-              "feature": 3,
-              "seuil": 10.8,
-              "decision": 1,
-              "arbre enfant de gauche": {
-                "feature": 1,
-                "seuil": 3.0,
-                "decision": 1,
-                "arbre enfant de gauche": {
-                  "feature": null,
-                  "seuil": null,
-                  "decision": 1,
-                  "arbre enfant de gauche": null,
-                  "arbre enfant de droite": null
-                },
-                "arbre enfant de droite": {
                   "feature": 0,
-                  "seuil": 0.8209302325581396,
+                  "seuil": 0.8188235294117647,
                   "decision": 1,
                   "arbre enfant de gauche": {
-                    "feature": 2,
-                    "seuil": 8.84,
+                    "feature": null,
+                    "seuil": null,
                     "decision": 1,
-                    "arbre enfant de gauche": {
-                      "feature": null,
-                      "seuil": null,
-                      "decision": 0,
-                      "arbre enfant de gauche": null,
-                      "arbre enfant de droite": null
-                    },
-                    "arbre enfant de droite": {
-                      "feature": 2,
-                      "seuil": 9.75,
-                      "decision": 1,
-                      "arbre enfant de gauche": {
-                        "feature": 0,
-                        "seuil": 0.8144578313253013,
-                        "decision": 1,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      },
-                      "arbre enfant de droite": {
-                        "feature": null,
-                        "seuil": null,
-                        "decision": 0,
-                        "arbre enfant de gauche": null,
-                        "arbre enfant de droite": null
-                      }
-                    }
+                    "arbre enfant de gauche": null,
+                    "arbre enfant de droite": null
                   },
                   "arbre enfant de droite": {
                     "feature": null,
