@@ -15,6 +15,8 @@ Datasets/*.csv
 Datasets/*.xlsx
 # Si vous avez de petits CSV pour des exemples, décommentez :
 # !Datasets/example.csv
+!Datasets/
+!Datasets/students_data.csv 
 
 # Modèles très volumineux uniquement
 Models/*.h5
