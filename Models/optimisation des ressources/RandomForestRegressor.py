@@ -1,5 +1,6 @@
 import numpy as np 
 import json
+import matplotlib.pyplot as plt
 
 class Node:
     def __init__(self):
@@ -10,7 +11,7 @@ class Node:
         self.right=None # noeud enfant a droite
 
 class RandomForestRegressor: # Class foret aleatoire regressif
-    def __init__(self,profondeur_max=10,min_gain=1e-5,n_trees=2): # constructeur: il permet d'initialiser les attributs (dans notre cas les hyperparametres d'une instance (objet)
+    def __init__(self,profondeur_max=10,min_gain=1e-5,n_trees=10): # constructeur: il permet d'initialiser les attributs (dans notre cas les hyperparametres d'une instance (objet)
         self.profondeur_max=profondeur_max
         self.min_gain=min_gain
         self.forest=[] # definition de la foret
@@ -84,14 +85,26 @@ class RandomForestRegressor: # Class foret aleatoire regressif
             return self.predict_one(node.left,x)
         else:
             return self.predict_one(node.right,x)
+    
+
             
     def predict_tree(self,root,X): # effectue une prediction pour plusieurs vecteurs (plusieurs vecteurs en entrez un vecteur de valeurs predite en sortie
         return np.array([self.predict_one(root,x) for x in X])
     
     def predict(self,X):
-        preds=[]
+        preds = []
         for root in self.forest:
-            preds.append(self.predict_tree(root,X))
+            preds.append(self.predict_tree(root, X))
+            
+            # Visualisation des valeurs prédites
+        '''plt.figure(figsize=(10, 6))
+        for i, tree_preds in enumerate(preds):
+            plt.plot(tree_preds, label=f'Arbre {i+1}', alpha=0.5)
+        plt.title('Valeurs prédites par chaque arbre')
+        plt.xlabel('Index des échantillons')
+        plt.ylabel('Valeurs prédites')
+        plt.legend()
+        plt.show()'''
         return np.mean(preds,axis=0)
 
     def score(self,X,y): # Calcul du coefficient de determination

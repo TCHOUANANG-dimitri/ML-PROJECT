@@ -1,5 +1,6 @@
 import numpy as np
 import json
+import matplotlib.pyplot as plt
 
 class Node:
     def __init__(self):
@@ -12,7 +13,7 @@ class Node:
 
 class XGBoostRegressor:
 
-    def __init__(self, profondeur_max=10, min_gain=1e-5, n_trees=2, 
+    def __init__(self, profondeur_max=10, min_gain=1e-5, n_trees=10, 
                  learning_rate=0.3, reg_lambda=1.0):
         self.profondeur_max = profondeur_max
         self.min_gain = min_gain
@@ -26,26 +27,38 @@ class XGBoostRegressor:
         # Initialisation: prédiction de base (moyenne)
         self.init = np.mean(y)
         F = np.full(len(y), self.init)  # Prédictions actuelles
-        
+            
         for i in range(self.n_trees):
-            #  Calcul des gradients et hessians
-            #  gradient = -(y - F), hessian = 1
+                #  Calcul des gradients et hessians
+                #  gradient = -(y - F), hessian = 1
             gradients = -(y - F)  
             hessians = np.ones(len(y))  
-            
-            # Construire un arbre sur les gradients (avec hessians)
+                
+                # Construire un arbre sur les gradients (avec hessians)
             tree = self.build_tree(X, gradients, hessians)
-            
-            # Prédictions de l'arbre
+                
+                # Prédictions de l'arbre
             preds = self.predict_tree(tree, X)
-            
-            # Mise à jour des prédictions avec learning rate
+                
+                # Mise à jour des prédictions avec learning rate
             F += self.learning_rate * preds
-            
-            # Stocker l'arbre
+                
+                # Stocker l'arbre
             self.forest.append(tree)
+            
+            '''# Visualisation: nuage de points gradient vs hessian
+            plt.figure(figsize=(10, 6))
+            sizes = np.abs(preds) * 100  # Taille des points basée sur la prédiction
+            plt.scatter(gradients, hessians, s=sizes, alpha=0.6, c=preds, cmap='viridis')
+            plt.xlabel('Gradient')
+            plt.ylabel('Hessian')
+            plt.title('Gradient vs Hessian (taille = valeur prédite)')
+            plt.colorbar(label='Prédiction')
+            plt.grid(True)
+            plt.tight_layout()
+            plt.show()'''
     
-    def build_tree(self, X, gradients, hessians, profondeur=0):
+    def build_tree(self, X, gradients, hessians, profondeur=10):
         
         node = Node()
         
