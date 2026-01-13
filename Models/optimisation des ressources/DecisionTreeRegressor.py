@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import json
+import matplotlib.pyplot as plt
  
 
 class Node:
@@ -22,7 +23,10 @@ class decisionTreeRegressor: # Class arbre de decision regressif
     def fit(self,X,y): # Fonction permettant l'entrainement du modele en utilisant l'arbre construit dans la fonction plus bas
         self.root=self.build_tree(X,y)
     
+
+    
     def build_tree(self,X,y,seuil_min_gain=0.0001,profondeur_max=20,profondeur=0):
+
         node=Node() # creation du noeud racine
         node.prediction=np.mean(y) # initialisation de la prediction/racine (moyenne de la target)
         variance_parent=np.var(y) # initialisation de la variance de la racine (variance de la target)
@@ -65,7 +69,39 @@ class decisionTreeRegressor: # Class arbre de decision regressif
         node.left=self.build_tree(X[gauche_idx],y[gauche_idx],seuil_min_gain,profondeur_max,profondeur+1)
         node.right=self.build_tree(X[droite_idx],y[droite_idx],seuil_min_gain,profondeur_max,profondeur+1)
         return node
+    
+    '''def plot_information_gain(self, X, y):
+        gains = []
+        depths = []
 
+        def calculate_gain(node, depth):
+            if node is None:
+                return
+            if node.feature is not None:
+                variance_parent = np.var(y)
+                gauche_idx = X[:, node.feature] <= node.threshold
+                droite_idx = X[:, node.feature] > node.threshold
+                y_gauche = y[gauche_idx]
+                y_droite = y[droite_idx]
+                erreur_apres = (len(y_gauche) / len(y)) * np.var(y_gauche) + (len(y_droite) / len(y)) * np.var(y_droite)
+                gain = variance_parent - erreur_apres
+                gains.append(gain)
+                depths.append(depth)
+            calculate_gain(node.left, depth + 1)
+            calculate_gain(node.right, depth + 1)
+
+        calculate_gain(self.root, 0)
+
+        plt.figure(figsize=(10, 6))
+        plt.scatter(depths, gains, marker='o', s=100)
+        plt.plot(depths, gains, alpha=0.6)
+        plt.title('Évolution du gain d\'information par profondeur')
+        plt.xlabel('Profondeur de l\'arbre')
+        plt.ylabel('Gain d\'information')
+        plt.grid(True, alpha=0.3)
+        plt.show()'''
+
+        
     def predict_one(self,x): # effectue une prediction pour une seule instance ( un vecteur en entrer , unscalaire en sortie)
         return self.predict_recursive(self.root,x)
         

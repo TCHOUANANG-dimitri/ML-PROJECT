@@ -1,5 +1,6 @@
 import numpy as np
 import json
+import matplotlib.pyplot as plt
 
 class Node:
     def __init__(self):
@@ -11,7 +12,7 @@ class Node:
 
 
 class GradientBoostingRegressor: # Class arbre de decision regressif
-    def __init__(self,profondeur_max=10,min_gain=1e-5,n_trees=2,learning_rate=0.5): # constructeur: il permet d'initialiser les attributs (dans notre cas les hyperparametres d'une instance (objet)
+    def __init__(self,profondeur_max=10,min_gain=1e-5,n_trees=10,learning_rate=0.5): # constructeur: il permet d'initialiser les attributs (dans notre cas les hyperparametres d'une instance (objet)
         self.profondeur_max=profondeur_max
         self.min_gain=min_gain
         self.n_trees=n_trees
@@ -85,11 +86,21 @@ class GradientBoostingRegressor: # Class arbre de decision regressif
     def predict_tree(self,tree,X): # effectue une prediction pour plusieurs vecteurs (plusieurs vecteurs en entrez un vecteur de valeurs predite en sortie
         return np.array([self.predict_one(tree,x) for x in X])
 
-    def predict(self,X):
-        F=np.full(len(X),self.init)
+
+    def predict(self, X):
+        F = np.full(len(X), self.init)
         for tree in self.forest:
-            F+=self.learning_rate*self.predict_tree(tree,X)
+            F += self.learning_rate * self.predict_tree(tree, X)
         return F
+        ''' plt.figure(figsize=(12, 6))
+        for idx, tree in enumerate(self.forest):
+                predictions = self.predict_tree(tree, X)
+                plt.plot(predictions, label=f'Tree {idx+1}', alpha=0.7)
+        plt.xlabel('Index')
+        plt.ylabel('Valeur predite')
+        plt.title('Predictions de chaque arbre dans la foret')
+        plt.legend()
+        plt.show()'''
 
     def score(self,X,y): # Calcul du coefficient de determination
         y_pred=self.predict(X)
