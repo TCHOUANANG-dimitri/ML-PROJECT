@@ -1,6 +1,8 @@
  // Simple in-memory datasets (rooms, teachers, filières/matières) -----------------------
 
- const filieresData = {
+ // Les données filieresMatieres seront remplacées par MATIERES_BY_LEVEL du serveur Django
+ // Ceci est un fallback en cas où les données ne sont pas disponibles
+ const filieresData = (typeof MATIERES_BY_LEVEL !== 'undefined') ? MATIERES_BY_LEVEL : {
    "TRONC COMMUN": {
      1: [
        "Mathématiques Générales I",
@@ -355,7 +357,7 @@ let recMatiereSelect = null;
 
 function populateFiliereSelects() {
   // Recommendation filière
-  if (!recFiliereSelect) recFiliereSelect = document.getElementById("recFiliere");
+  if (!recFiliereSelect) recFiliereSelect = document.getElementById("rec-filiere");
   if (!recFiliereSelect) return; // DOM not ready
   
   recFiliereSelect.innerHTML = `<option value="">Sélectionner</option>`;
@@ -365,29 +367,17 @@ function populateFiliereSelects() {
     opt.textContent = f;
     recFiliereSelect.appendChild(opt);
   });
-
-  // Populate prediction filière dynamically so all filières are available
-  const predMajorSelect = document.getElementById("predMajor");
-  if (predMajorSelect) {
-    predMajorSelect.innerHTML = `<option value="">Sélectionner</option>`;
-    Object.keys(filieresData).forEach((f) => {
-      const opt = document.createElement("option");
-      opt.value = f;
-      opt.textContent = f;
-      predMajorSelect.appendChild(opt);
-    });
-  }
 }
 
 function populateMatiereOptions() {
-  if (!recFiliereSelect) return;
+  if (!recFiliereSelect || !recNiveauSelect || !recMatiereSelect) return;
   const filiere = recFiliereSelect.value;
-  const level = parseInt(recNiveauSelect.value, 10);
+  const level = recNiveauSelect.value ? parseInt(recNiveauSelect.value, 10) : null;
 
   recMatiereSelect.innerHTML =
     '<option value="">Choisir une matière</option>';
 
-  if (!filiere || !level || !filieresData[filiere]) return;
+  if (!filiere || !level || !filieresData[filiere] || !filieresData[filiere][level]) return;
   const subjects = filieresData[filiere][level] || [];
   subjects.forEach((m) => {
     const opt = document.createElement("option");
@@ -398,10 +388,10 @@ function populateMatiereOptions() {
 }
 
 function initRecommendationForm() {
-  // Get form elements AFTER DOM is ready
-  recFiliereSelect = document.getElementById("recFiliere");
-  recNiveauSelect = document.getElementById("recNiveau");
-  recMatiereSelect = document.getElementById("recMatiere");
+  // Get form elements AFTER DOM is ready - utiliser les IDs avec préfixe 'rec-'
+  recFiliereSelect = document.getElementById("rec-filiere");
+  recNiveauSelect = document.getElementById("rec-niveau");
+  recMatiereSelect = document.getElementById("rec-nom_matiere");
   
   if (recFiliereSelect && recNiveauSelect && recMatiereSelect) {
     recFiliereSelect.addEventListener("change", populateMatiereOptions);
@@ -467,45 +457,207 @@ function programCourse({ day, slotId, courseData }) {
 
 function handleRecommendationSubmit(e) {
   e.preventDefault();
-  if (!recFiliereSelect) return;
+  if (!recFiliereSelect || !recNiveauSelect || !recMatiereSelect) return;
   
-  const filiere = recFiliereSelect.value;
-  const niveau = parseInt(recNiveauSelect.value, 10);
-  const matiere = recMatiereSelect.value;
-  const semestre = document.getElementById("recSemestre").value;
-  const type = document.getElementById("recType").value;
-  const effectif = parseInt(
-    document.getElementById("recEffectif").value,
-    10
-  );
-  const date = document.getElementById("recDate").value;
+  // Utiliser les vrais IDs du formulaire HTML avec préfixe 'rec-'
+  const filiere = document.getElementById("rec-filiere").value;
+  const niveau = document.getElementById("rec-niveau").value;
+  const matiere = document.getElementById("rec-nom_matiere").value;
+  const type = document.getElementById("rec-Type_cours").value;
+  const effectif = parseInt(document.getElementById("rec-Nb_personnes").value, 10);
+  const jour = document.getElementById("rec-jour").value;
+  const heure = document.getElementById("rec-heure").value;
 
-  if (!filiere || !niveau || !matiere || !semestre || !type || !effectif || !date)
+  if (!filiere || !niveau || !matiere || !type || !effectif)
     return;
 
-  const recRooms = recommendRooms(effectif);
-  const recTeachers = recommendTeachers({ filiere, matiere });
+  // Envoyer au serveur Django
+  const formData = new FormData();
+  formData.append("filiere", filiere);
+  formData.append("niveau", niveau);
+  formData.append("nom_matiere", matiere);
+  formData.append("Type_cours", type);
+  formData.append("Nb_personnes", effectif);
+  formData.append("jour", jour);
+  formData.append("heure", heure);
+  formData.append("besoin_projecteur", document.getElementById("rec-besoin_projecteur").value);
 
-  renderRoomRecommendations(recRooms, {
-    filiere,
-    niveau,
-    matiere,
-    type,
-    effectif,
-    date,
-  });
-  renderTeacherRecommendations(recTeachers, {
-    filiere,
-    niveau,
-    matiere,
-    type,
-    effectif,
-    date,
-  });
+  fetch("/recommendation/", {
+    method: "POST",
+    headers: {
+      "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value,
+      "X-Requested-With": "XMLHttpRequest"
+    },
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.rooms && data.teachers) {
+      renderRoomRecommendations(data.rooms, {
+        filiere,
+        niveau,
+        matiere,
+        type,
+        effectif,
+        jour,
+        heure,
+      });
+      renderTeacherRecommendations(data.teachers, {
+        filiere,
+        niveau,
+        matiere,
+        type,
+        effectif,
+        jour,
+        heure,
+      });
 
-  if (recommendationResults) {
-    recommendationResults.hidden = false;
+      if (recommendationResults) {
+        recommendationResults.style.display = "block";
+      }
+    }
+  })
+  .catch(error => console.error("Erreur:", error));
+}
+
+/**
+ * Fonction pour programmer une salle ou un enseignant
+ * @param {HTMLElement} button - Le bouton cliqué
+ * @param {string} type - 'room' ou 'teacher'
+ */
+function openProgrammer(button, type) {
+  // Récupérer les données de la recommandation
+  const dataAttr = type === 'room' ? 'data-room' : 'data-teacher';
+  const nameAttr = type === 'room' ? 'data-room-name' : 'data-teacher-name';
+  
+  const id = button.getAttribute(dataAttr);
+  const name = button.getAttribute(nameAttr);
+  
+  if (!id || !name) {
+    alert("Données manquantes pour cette recommandation");
+    return;
   }
+
+  // Récupérer les données du formulaire
+  const filiere = document.getElementById("rec-filiere").value;
+  const niveau = document.getElementById("rec-niveau").value;
+  const matiere = document.getElementById("rec-nom_matiere").value;
+  const typeSeance = document.getElementById("rec-Type_cours").value;
+  const effectif = parseInt(document.getElementById("rec-Nb_personnes").value, 10);
+  const jour = document.getElementById("rec-jour").value;
+  const heure = document.getElementById("rec-heure").value;
+
+  if (!filiere || !niveau || !matiere || !jour || !heure) {
+    alert("Veuillez d'abord remplir les champs obligatoires du formulaire");
+    return;
+  }
+
+  // Créer une boîte de dialogue pour confirmer et sélectionner le créneau
+  const modal = document.createElement("div");
+  modal.className = "modal";
+  modal.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:10000;";
+  
+  const content = document.createElement("div");
+  content.className = "modal-content";
+  content.style.cssText = "background:white;padding:24px;border-radius:8px;max-width:400px;box-shadow:0 4px 12px rgba(0,0,0,0.15);";
+  
+  const title = document.createElement("h3");
+  title.textContent = `Programmer ${type === 'room' ? 'salle' : 'enseignant'}`;
+  title.style.marginBottom = "16px";
+  
+  const info = document.createElement("div");
+  info.style.cssText = "background:#f5f5f5;padding:12px;border-radius:4px;margin-bottom:16px;font-size:14px;";
+  info.innerHTML = `
+    <strong>${type === 'room' ? 'Salle' : 'Enseignant'}:</strong> ${name}<br/>
+    <strong>Matière:</strong> ${matiere}<br/>
+    <strong>Filière/Niveau:</strong> ${filiere} - Niveau ${niveau}<br/>
+    <strong>Type:</strong> ${typeSeance}<br/>
+    <strong>Effectif:</strong> ${effectif} étudiants<br/>
+    <strong>Date:</strong> ${jour}
+  `;
+  
+  const slotLabel = document.createElement("label");
+  slotLabel.textContent = "Sélectionner un créneau:";
+  slotLabel.style.cssText = "display:block;margin-bottom:8px;font-weight:bold;";
+  
+  const slotSelect = document.createElement("select");
+  slotSelect.style.cssText = "width:100%;padding:8px;margin-bottom:16px;border:1px solid #ddd;border-radius:4px;";
+  
+  // Ajouter les créneaux disponibles
+  const options = [
+    { value: "morning", text: "Matin (7:30 - 11:30)" },
+    { value: "afternoon", text: "Après-midi (12:30 - 16:30)" }
+  ];
+  
+  options.forEach(opt => {
+    const option = document.createElement("option");
+    option.value = opt.value;
+    option.textContent = opt.text;
+    slotSelect.appendChild(option);
+  });
+  
+  const buttons = document.createElement("div");
+  buttons.style.cssText = "display:flex;gap:8px;justify-content:flex-end;";
+  
+  const cancelBtn = document.createElement("button");
+  cancelBtn.textContent = "Annuler";
+  cancelBtn.className = "btn";
+  cancelBtn.style.cssText = "padding:8px 16px;background:#f0f0f0;border:1px solid #ddd;border-radius:4px;cursor:pointer;";
+  cancelBtn.onclick = () => modal.remove();
+  
+  const confirmBtn = document.createElement("button");
+  confirmBtn.textContent = "Confirmer";
+  confirmBtn.className = "btn primary";
+  confirmBtn.style.cssText = "padding:8px 16px;background:#007bff;color:white;border:none;border-radius:4px;cursor:pointer;";
+  confirmBtn.onclick = () => {
+    const slot = slotSelect.value;
+    const day = jour ? new Date(jour).toLocaleDateString('fr-FR', { weekday: 'long' }) : "Lundi";
+    
+    const courseData = {
+      matiere,
+      filiere,
+      niveau,
+      type: typeSeance,
+      effectif,
+      [type === 'room' ? 'roomId' : 'teacherId']: id,
+      [type === 'room' ? 'roomName' : 'teacherName']: name
+    };
+    
+    const result = programCourse({
+      day: day.charAt(0).toUpperCase() + day.slice(1),
+      slotId: slot,
+      courseData
+    });
+    
+    if (result.ok) {
+      alert(`✓ ${type === 'room' ? 'Salle' : 'Enseignant'} programmé(e) avec succès!`);
+      modal.remove();
+      // Aller à la section emploi du temps
+      const timetableSection = document.getElementById("page-timetable");
+      if (timetableSection) {
+        timetableSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      alert(`✗ Erreur: ${result.reason}`);
+    }
+  };
+  
+  buttons.appendChild(cancelBtn);
+  buttons.appendChild(confirmBtn);
+  
+  content.appendChild(title);
+  content.appendChild(info);
+  content.appendChild(slotLabel);
+  content.appendChild(slotSelect);
+  content.appendChild(buttons);
+  
+  modal.appendChild(content);
+  document.body.appendChild(modal);
+  
+  // Fermer avec Échap
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") modal.remove();
+  });
 }
 
 // Attach form listener after DOM is ready
@@ -518,6 +670,16 @@ function attachRecommendationFormListener() {
   if (recommendationForm) {
     recommendationForm.addEventListener("submit", handleRecommendationSubmit);
   }
+
+  // Ajouter les event listeners aux boutons Programmer
+  document.addEventListener("click", (e) => {
+    if (e.target && e.target.classList && e.target.classList.contains("program-btn")) {
+      const button = e.target;
+      const isRoom = button.hasAttribute("data-room");
+      const type = isRoom ? "room" : "teacher";
+      openProgrammer(button, type);
+    }
+  });
 }
 
 function renderRoomRecommendations(list, context) {

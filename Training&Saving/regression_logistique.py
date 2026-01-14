@@ -26,7 +26,7 @@ y = df["Reussite"].values
 
 
     # -------------------------------
-    # Normalisation (recommandée)
+    # Normalisation
     # -------------------------------
 X = (X - X.mean(axis=0)) / X.std(axis=0)
 

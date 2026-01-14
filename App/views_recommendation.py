@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
+from django.http import JsonResponse
 
 from ml_utils.predictor import load_models, predict_top_rooms_and_teachers
 from ml_utils.data_prep import load_datasets, parse_planning_file
@@ -65,12 +66,20 @@ def recommendation_view(request):
                     if stars < 0:
                         stars = 0
                     stars_str = "".join(["★" for _ in range(stars)]) + "".join(["☆" for _ in range(5 - stars)])
-                    annotated.append({"id": ident, "score": float(score), "row": row, "stars": stars, "stars_str": stars_str})
+                    annotated.append({"id": ident, "score": float(score), "row": row.to_dict() if hasattr(row, 'to_dict') else row, "stars": stars, "stars_str": stars_str})
                 return annotated
 
             context["rooms"] = annotate(result.get("rooms", []))
             context["teachers"] = annotate(result.get("teachers", []))
         except Exception as e:
             context["errors"].append(str(e))
+
+        # Si c'est un fetch (AJAX), retourner JSON
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or 'application/json' in request.headers.get('Accept', ''):
+            return JsonResponse({
+                "rooms": context["rooms"],
+                "teachers": context["teachers"],
+                "errors": context["errors"]
+            })
 
     return render(request, "index.html", context)

@@ -145,8 +145,8 @@
 
         <script>
           // MATIERES_BY_LEVEL and MATIERES_MAP provided by view as JSON strings
-          const MATIERES_BY_LEVEL = { matieres_by_level_json , safe };
-          const MATIERES_MAP = { matieres_json , safe };
+          const MATIERES_BY_LEVEL = {{ matieres_by_level_json|safe }};
+          const MATIERES_MAP = {{ matieres_json|safe }};
 
 
           function getAllMatieres() {
@@ -278,36 +278,36 @@
         <section class="page" id="page-recommendation" aria-label="Recommandation &amp; Planification intelligente">
           <h1 class="page-title">Recommandation &amp; Planification intelligente</h1>
 
-          <div class="grid-2-vertical">
-            <!-- Server-side form that posts to the recommendation view -->
-            <form class="card form" id="recommendationForm" method="post" action="/recommendation/">
+          <!-- FORMULAIRE EN HAUT - PLEINE LARGEUR -->
+          <div class="card form" style="margin-bottom:20px;">
+            <form id="recommendationForm" method="post" action="/recommendation/">
               <div class="card-header">
                 <h2>Paramètres de la séance</h2>
               </div>
               <div class="form-grid">
                 <div class="form-group">
-                  <label for="Nb_personnes">Effectif estimé *</label>
-                  <input name="Nb_personnes" id="Nb_personnes" type="number" min="1" required />
+                  <label for="rec-Nb_personnes">Effectif estimé *</label>
+                  <input name="Nb_personnes" id="rec-Nb_personnes" type="number" min="1" required />
                 </div>
                 <div class="form-group">
-                  <label for="Type_cours">Type de séance *</label>
-                  <select name="Type_cours" id="Type_cours" required>
+                  <label for="rec-Type_cours">Type de séance *</label>
+                  <select name="Type_cours" id="rec-Type_cours" required>
                     <option value="CM">CM</option>
                     <option value="TD">TD</option>
                     <option value="TP">TP</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="besoin_projecteur">Besoin vidéoprojecteur</label>
-                  <select name="besoin_projecteur" id="besoin_projecteur">
+                  <label for="rec-besoin_projecteur">Besoin vidéoprojecteur</label>
+                  <select name="besoin_projecteur" id="rec-besoin_projecteur">
                     <option value="OUI">OUI</option>
                     <option value="NON">NON</option>
                   </select>
                 </div>
 
                 <div class="form-group">
-                  <label for="niveau">Niveau</label>
-                  <select name="niveau" id="niveau" required>
+                  <label for="rec-niveau">Niveau *</label>
+                  <select name="niveau" id="rec-niveau" required>
                     <option value="">Sélectionner</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -317,28 +317,25 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="filiere">Filière</label>
-                  <select name="filiere" id="filiere">
-                    <option value="">Toutes les filières</option>
-                    {% for f in filieres %}
-                      <option value="{{ f }}">{{ f }}</option>
-                    {% endfor %}
+                  <label for="rec-filiere">Filière *</label>
+                  <select name="filiere" id="rec-filiere" required>
+                    <option value="">Sélectionner</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="nom_matiere">Nom de la matière</label>
-                  <select name="nom_matiere" id="nom_matiere">
+                  <label for="rec-nom_matiere">Nom de la matière *</label>
+                  <select name="nom_matiere" id="rec-nom_matiere" required>
                     <option value="">Choisir une matière</option>
                   </select>
                 </div>
 
                 <div class="form-group">
-                  <label for="jour">Date / jour</label>
-                  <input name="jour" id="jour" type="date" />
+                  <label for="rec-jour">Date / jour</label>
+                  <input name="jour" id="rec-jour" type="date" />
                 </div>
                 <div class="form-group">
-                  <label for="heure">Tranche horaire</label>
-                  <select name="heure" id="heure">
+                  <label for="rec-heure">Tranche horaire</label>
+                  <select name="heure" id="rec-heure">
                     <option value="morning">7:30 - 11:30</option>
                     <option value="afternoon">12:30 - 16:30</option>
                   </select>
@@ -349,81 +346,87 @@
                 {% csrf_token %}
                 <button type="submit" class="btn primary">Prédire</button>
                 <div class="form-help">
-                  L’IA utilise la disponibilité, la spécialité, les heures restantes et l’historique des enseignants.
+                  L'IA utilise la disponibilité, la spécialité, les heures restantes et l'historique des enseignants.
                 </div>
               </div>
             </form>
+          </div>
 
-            <!-- Right column: results rendered by Django view -->
-            <div class="card" id="recommendationResults">
-              <div class="card-header space-between">
-                <h2>Résultats de la recommandation IA</h2>
-                <span class="chip chip-ai">IA</span>
-              </div>
+          <!-- RÉSULTATS EN BAS - 2 COLONNES (SALLES À GAUCHE, ENSEIGNANTS À DROITE) -->
+          <div class="card" id="recommendationResults">
+            <div class="card-header space-between">
+              <h2>Résultats de la recommandation IA</h2>
+              <span class="chip chip-ai">IA</span>
+            </div>
 
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:16px;">
+              <!-- COLONNE GAUCHE: SALLES -->
               <div class="recommendation-block">
-                <h3>Top 3 salles recommandées</h3>
+                <h3>🏫 Top 3 salles recommandées</h3>
                 <div class="recommendation-list" id="roomRecommendations">
                   {% for item in rooms %}
                     <div class="recommendation-item">
-                      <div style="display:flex;justify-content:space-between;align-items:center;">
+                      <div style="display:flex;justify-content:space-between;align-items:start;">
                         <div>
-                          <span class="icon">🏫</span>
                           <strong>{{ item.id }}</strong>
                           <div class="small">{{ item.row.Nom_ressource }}</div>
                         </div>
                         <div style="text-align:right;">
                           <div>{{ item.stars_str }}</div>
-                          <div>Score: {{ item.score|floatformat:3 }}</div>
+                          <div class="small" style="color:#666;">Score: {{ item.score|floatformat:3 }}</div>
                         </div>
                       </div>
-                      <div style="margin-top:6px;">Capacité: {{ item.row.Capacite }} • Projecteur: {{ item.row.Videoprojecteur }} • Type: {{ item.row.Type_ressource }}</div>
-                      <div style="margin-top:8px;text-align:right;">
-                        <button type="button" class="btn program-btn" data-room="{{ item.id }}" onclick="openProgrammer(this, 'room')">Programmer</button>
+                      <div style="margin-top:6px;font-size:12px;color:#666;">
+                        Capacité: {{ item.row.Capacite }} • Projecteur: {{ item.row.Videoprojecteur }}
+                      </div>
+                      <div style="margin-top:8px;">
+                        <button type="button" class="btn program-btn" data-room="{{ item.id }}" data-room-name="{{ item.row.Nom_ressource }}">Programmer</button>
                       </div>
                     </div>
                   {% empty %}
-                    <p>Aucune prédiction pour les salles.</p>
+                    <p style="color:#999;">Effectuez une prédiction pour voir les recommandations</p>
                   {% endfor %}
                 </div>
               </div>
 
+              <!-- COLONNE DROITE: ENSEIGNANTS -->
               <div class="recommendation-block">
-                <h3>Top 3 enseignants recommandés</h3>
+                <h3>👨‍🏫 Top 3 enseignants recommandés</h3>
                 <div class="recommendation-list" id="teacherRecommendations">
                   {% for item in teachers %}
                     <div class="recommendation-item">
-                      <div style="display:flex;justify-content:space-between;align-items:center;">
+                      <div style="display:flex;justify-content:space-between;align-items:start;">
                         <div>
-                          <span class="icon">👨‍🏫</span>
                           <strong>{% if item.row.Nom %}{{ item.row.Nom }}{% else %}{{ item.id }}{% endif %}</strong>
-                          <div class="small">Matricule: {{ item.row.Enseignant_id }}</div>
+                          <div class="small">{{ item.row.Enseignant_id }}</div>
                         </div>
                         <div style="text-align:right;">
                           <div>{{ item.stars_str }}</div>
-                          <div>Score: {{ item.score|floatformat:3 }}</div>
+                          <div class="small" style="color:#666;">Score: {{ item.score|floatformat:3 }}</div>
                         </div>
                       </div>
-                      <div style="margin-top:6px;">Spécialité: {{ item.row.Specialite }} • Ancienneté: {{ item.row.Anciennete }} • Disponibilité: —</div>
-                      <div style="margin-top:8px;text-align:right;">
-                        <button type="button" class="btn program-btn" data-teacher="{{ item.row.Enseignant_id|default:item.id }}" onclick="openProgrammer(this, 'teacher')">Programmer</button>
+                      <div style="margin-top:6px;font-size:12px;color:#666;">
+                        Spécialité: {{ item.row.Specialite }} • Ancienneté: {{ item.row.Anciennete }}
+                      </div>
+                      <div style="margin-top:8px;">
+                        <button type="button" class="btn program-btn" data-teacher="{{ item.row.Enseignant_id|default:item.id }}" data-teacher-name="{% if item.row.Nom %}{{ item.row.Nom }}{% else %}{{ item.id }}{% endif %}">Programmer</button>
                       </div>
                     </div>
                   {% empty %}
-                    <p>Aucune prédiction pour les enseignants.</p>
+                    <p style="color:#999;">Effectuez une prédiction pour voir les recommandations</p>
                   {% endfor %}
                 </div>
               </div>
-
-              {% if errors %}
-                <div class="card" style="background:#fee;margin-top:12px;padding:8px;">
-                  <strong>Errors</strong>
-                  <ul>
-                    {% for e in errors %}<li>{{ e }}</li>{% endfor %}
-                  </ul>
-                </div>
-              {% endif %}
             </div>
+
+            {% if errors %}
+              <div style="background:#fee;margin-top:12px;padding:8px;border-left:4px solid #e74c3c;border-radius:2px;">
+                <strong>Erreurs</strong>
+                <ul style="margin:4px 0 0 20px;font-size:12px;">
+                  {% for e in errors %}<li>{{ e }}</li>{% endfor %}
+                </ul>
+              </div>
+            {% endif %}
           </div>
         </section>
 
