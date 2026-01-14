@@ -14,7 +14,6 @@ import matplotlib.pyplot as plt
 df = pd.read_excel("jeu_données_étudiants.xlsx", engine="openpyxl")
 features = [
         "Age",
-        "Moyenne_annuelle",
         "Nb_heures_presence",
         "ratio_heure",
         "Nb_matieres_non_validees",
