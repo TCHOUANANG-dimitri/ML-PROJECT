@@ -74,11 +74,54 @@ def recommendation_view(request):
         except Exception as e:
             context["errors"].append(str(e))
 
-        # Si c'est un fetch (AJAX), retourner JSON
+        # Si c'est un fetch (AJAX), retourner JSON.
+        # Normaliser la structure pour correspondre aux attentes du JS frontend
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or 'application/json' in request.headers.get('Accept', ''):
+            def normalize_room(item):
+                row = item.get("row", {}) or {}
+                name = row.get("Nom_ressource") or row.get("Nom") or row.get("nom_ressource") or row.get("name") or item.get("id")
+                capacity = row.get("Capacite") or row.get("Capacité") or row.get("capacity") or row.get("Capacite")
+                return {
+                    "id": item.get("id"),
+                    "name": name,
+                    "capacity": capacity,
+                    "videoprojecteur": row.get("Videoprojecteur") or row.get("videoprojecteur"),
+                    "score": item.get("score"),
+                    "stars_str": item.get("stars_str"),
+                    "raw": row,
+                }
+
+            def normalize_teacher(item):
+                row = item.get("row", {}) or {}
+                name = row.get("Nom") or row.get("name") or item.get("id")
+                speciality = row.get("Specialite") or row.get("specialite") or row.get("Speciality") or row.get("speciality")
+                # try multiple possible hours fields
+                hours_remaining = row.get("Heures_restantes") or row.get("Heures Restantes") or row.get("hoursRemaining") or row.get("hours_remaining")
+                # fallback compute if possible
+                if hours_remaining is None:
+                    try:
+                        tot = float(row.get("Heures_totales_prevues") or row.get("Heures totales prevues") or 0)
+                        done = float(row.get("Heures_deja_faites") or row.get("Heures déjà faites") or row.get("Heures_deja_faites") or 0)
+                        hours_remaining = max(tot - done, 0)
+                    except Exception:
+                        hours_remaining = None
+
+                return {
+                    "id": item.get("id"),
+                    "name": name,
+                    "speciality": speciality,
+                    "hoursRemaining": hours_remaining,
+                    "score": item.get("score"),
+                    "stars_str": item.get("stars_str"),
+                    "raw": row,
+                }
+
+            rooms_out = [normalize_room(it) for it in context.get("rooms", [])]
+            teachers_out = [normalize_teacher(it) for it in context.get("teachers", [])]
+
             return JsonResponse({
-                "rooms": context["rooms"],
-                "teachers": context["teachers"],
+                "rooms": rooms_out,
+                "teachers": teachers_out,
                 "errors": context["errors"]
             })
 

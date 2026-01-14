@@ -137,61 +137,53 @@
    EEAT: { 3: [], 4: [], 5: [] },
  };
 
-const rooms = [
-  { id: 1, name: "Amphi A", capacity: 220 },
-  { id: 2, name: "Amphi B", capacity: 180 },
-  { id: 3, name: "Salle Info 1", capacity: 40 },
-  { id: 4, name: "Salle Info 2", capacity: 35 },
-  { id: 5, name: "Salle TD 101", capacity: 60 },
-  { id: 6, name: "Lab IA", capacity: 30 },
-];
+// Rooms and teachers will be loaded from API at runtime
+let rooms = [];
+let teachers = [];
 
-const teachers = [
-  {
-    id: 1,
-    matricule: "ENS-001",
-    name: "Dr. N. Talla",
-    filieres: ["GIT", "SDIA"],
-    subjects: ["Intelligence Artificielle", "Machine Learning"],
-    speciality: "IA",
-    hoursPlanned: 120,
-    hoursDone: 40,
-  },
-  {
-    id: 2,
-    matricule: "ENS-002",
-    name: "Pr. M. Mbarga",
-    filieres: ["TRONC COMMUN", "GCI"],
-    subjects: ["Mathématiques Générales I", "Résistance des Matériaux"],
-    speciality: "Mathématiques / Structures",
-    hoursPlanned: 160,
-    hoursDone: 90,
-  },
-  {
-    id: 3,
-    matricule: "ENS-003",
-    name: "Dr. A. Ngono",
-    filieres: ["GIT"],
-    subjects: ["Développement web", "Bases de données"],
-    speciality: "Informatique",
-    hoursPlanned: 140,
-    hoursDone: 60,
-  },
-  {
-    id: 4,
-    matricule: "ENS-004",
-    name: "Dr. J. Ekane",
-    filieres: ["SDIA"],
-    subjects: ["Data Mining", "Big Data"],
-    speciality: "Data / IA",
-    hoursPlanned: 140,
-    hoursDone: 110,
-  },
-];
+// Load real rooms and teachers from datasets via API
+async function loadRoomsAndTeachers() {
+  try {
+    const [roomsResp, teachersResp] = await Promise.all([
+      fetch('/api/load_resources/'),
+      fetch('/api/load_teachers/')
+    ]);
+    
+    if (roomsResp.ok) {
+      const data = await roomsResp.json();
+      rooms = (data.rooms || []).map(r => ({
+        id: r.id,
+        name: r.name,
+        capacity: r.capacity,
+        type: r.type,
+        videoprojecteur: r.videoprojecteur,
+        score: r.score
+      }));
+    }
+    
+    if (teachersResp.ok) {
+      const data = await teachersResp.json();
+      teachers = (data.teachers || []).map(t => ({
+        id: t.id,
+        name: t.name,
+        speciality: t.specialite,
+        department: t.department,
+        hoursRemaining: t.hoursRemaining,
+        anciennete: t.anciennete,
+        score_appreciation: t.score_appreciation,
+        matricule: t.id
+      }));
+    }
+    
+    console.log(`Loaded ${rooms.length} rooms and ${teachers.length} teachers from datasets`);
+  } catch (error) {
+    console.error('Error loading rooms and teachers:', error);
+  }
+}
 
-teachers.forEach((t) => {
-  t.hoursRemaining = t.hoursPlanned - t.hoursDone;
-});
+// Call on page load
+document.addEventListener('DOMContentLoaded', loadRoomsAndTeachers);
+
 
 const timetableSlots = [
   { id: "AM", label: "07h30 – 11h30" },
@@ -208,6 +200,46 @@ days.forEach((d) => {
     timetable[d][s.id] = null;
   });
 });
+
+// Helper: return dates for current week (Mon-Sat) as strings 'DD/MM'
+function getWeekDates(referenceDate = new Date()) {
+  // compute Monday of current week (French week starts Monday)
+  const ref = new Date(referenceDate);
+  const day = ref.getDay(); // 0=Sun,1=Mon
+  // compute delta to Monday
+  const deltaToMonday = (day === 0 ? -6 : 1 - day);
+  const monday = new Date(ref);
+  monday.setDate(ref.getDate() + deltaToMonday);
+  const dates = [];
+  for (let i = 0; i < 6; i++) {
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+    const dd = String(d.getDate()).padStart(2, '0');
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    dates.push(`${dd}/${mm}/${d.getFullYear()}`);
+  }
+  return dates;
+}
+
+function populateTimetableRoomFilter() {
+  const sel = document.getElementById('timetableRoomFilter');
+  if (!sel) return;
+  // clear except 'all'
+  const current = sel.value || 'all';
+  sel.innerHTML = '<option value="all">Toutes les salles</option>';
+  // use unique rooms array
+  rooms.forEach(r => {
+    const opt = document.createElement('option');
+    opt.value = typeof r.id === 'string' ? r.id : String(r.id);
+    opt.textContent = r.name || r.id;
+    sel.appendChild(opt);
+  });
+  sel.value = current;
+  if (!sel.dataset.inited) {
+    sel.addEventListener('change', () => refreshTimetable());
+    sel.dataset.inited = '1';
+  }
+}
 
  // Student dataset and loading state
  // The dashboard will remain placeholder until a student file is imported.
@@ -433,26 +465,80 @@ function recommendTeachers({ filiere, matiere }) {
 
 // Program a course into timetable and update teacher hours
 function programCourse({ day, slotId, courseData }) {
-  // No overlap, one room & one teacher per slot
-  const existing = timetable[day][slotId];
+  // Validate inputs
+  if (!courseData) return { ok: false, reason: "Données du cours manquantes." };
+  // normalize slotId: accept 'morning'/'afternoon' or 'AM'/'PM'
+  let slot = slotId;
+  if (slot === 'morning') slot = 'AM';
+  if (slot === 'afternoon') slot = 'PM';
+  if (!timetable[day] || !timetable[day].hasOwnProperty(slot)) {
+    return { ok: false, reason: "Jour ou créneau invalide." };
+  }
+
+  // require both roomId and teacherId
+  if (!courseData.roomId || !courseData.teacherId) {
+    return { ok: false, reason: "La programmation nécessite une salle et un enseignant." };
+  }
+
+  // Prevent overlap: one room or teacher already booked same slot
+  const existing = timetable[day][slot];
   if (existing) {
     return { ok: false, reason: "Créneau déjà occupé." };
   }
 
-  // capacity & teacher hours already ensured at recommendation level
-  timetable[day][slotId] = courseData;
+  // capacity check
+  const room = rooms.find(r => String(r.id) === String(courseData.roomId) || r.id === courseData.roomId);
+  if (!room) return { ok: false, reason: "Salle introuvable." };
+  if (courseData.effectif && room.capacity < courseData.effectif) {
+    return { ok: false, reason: `Capacité insuffisante (${room.capacity} < ${courseData.effectif}).` };
+  }
+
+  // teacher availability
+  const teacher = teachers.find(t => String(t.id) === String(courseData.teacherId) || t.matricule === courseData.teacherId);
+  const duration = courseData.durationHours || 4;
+  if (!teacher) return { ok: false, reason: "Enseignant introuvable." };
+  if (typeof teacher.hoursRemaining === 'number' && teacher.hoursRemaining < duration) {
+    return { ok: false, reason: `Heures restantes insuffisantes pour ${teacher.name || teacher.matricule}.` };
+  }
+
+  // Book slot
+  timetable[day][slot] = Object.assign({}, courseData, { roomName: room.name || courseData.roomName, teacherName: teacher.name || courseData.teacherName, durationHours: duration });
 
   // Update teacher hours
-  const teacher = teachers.find((t) => t.id === courseData.teacherId);
   if (teacher) {
-    teacher.hoursDone += courseData.durationHours;
-    teacher.hoursRemaining = teacher.hoursPlanned - teacher.hoursDone;
+    teacher.hoursDone = (teacher.hoursDone || 0) + duration;
+    teacher.hoursRemaining = (teacher.hoursPlanned || 0) - teacher.hoursDone;
   }
 
   refreshTimetable();
   refreshTeachersTable();
 
   return { ok: true };
+}
+
+// Submit booking to server API and handle revert on failure
+function submitBookingToServer({ day, slotId, courseData }) {
+  const payload = {
+    day: day,
+    slot: slotId,
+    teacher_id: courseData.teacherId,
+    room_id: courseData.roomId,
+    filiere: courseData.filiere,
+    niveau: courseData.niveau,
+    matiere: courseData.matiere,
+    type: courseData.type,
+    effectif: courseData.effectif || 0,
+    date: courseData.date || new Date().toISOString().split('T')[0]
+  };
+
+  return fetch('/api/program/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest'
+    },
+    body: JSON.stringify(payload)
+  }).then(r => r.json().then(j => ({ status: r.status, body: j }))).catch(e => ({ status: 0, body: { error: String(e) } }));
 }
 
 function handleRecommendationSubmit(e) {
@@ -526,17 +612,11 @@ function handleRecommendationSubmit(e) {
  * @param {string} type - 'room' ou 'teacher'
  */
 function openProgrammer(button, type) {
-  // Récupérer les données de la recommandation
+  // Build a modal that allows selecting both room and teacher (prefilled)
   const dataAttr = type === 'room' ? 'data-room' : 'data-teacher';
   const nameAttr = type === 'room' ? 'data-room-name' : 'data-teacher-name';
-  
-  const id = button.getAttribute(dataAttr);
-  const name = button.getAttribute(nameAttr);
-  
-  if (!id || !name) {
-    alert("Données manquantes pour cette recommandation");
-    return;
-  }
+  const preId = button.getAttribute(dataAttr);
+  const preName = button.getAttribute(nameAttr);
 
   // Récupérer les données du formulaire
   const filiere = document.getElementById("rec-filiere").value;
@@ -552,112 +632,116 @@ function openProgrammer(button, type) {
     return;
   }
 
-  // Créer une boîte de dialogue pour confirmer et sélectionner le créneau
-  const modal = document.createElement("div");
-  modal.className = "modal";
-  modal.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:10000;";
-  
-  const content = document.createElement("div");
-  content.className = "modal-content";
-  content.style.cssText = "background:white;padding:24px;border-radius:8px;max-width:400px;box-shadow:0 4px 12px rgba(0,0,0,0.15);";
-  
-  const title = document.createElement("h3");
-  title.textContent = `Programmer ${type === 'room' ? 'salle' : 'enseignant'}`;
-  title.style.marginBottom = "16px";
-  
-  const info = document.createElement("div");
-  info.style.cssText = "background:#f5f5f5;padding:12px;border-radius:4px;margin-bottom:16px;font-size:14px;";
-  info.innerHTML = `
-    <strong>${type === 'room' ? 'Salle' : 'Enseignant'}:</strong> ${name}<br/>
-    <strong>Matière:</strong> ${matiere}<br/>
-    <strong>Filière/Niveau:</strong> ${filiere} - Niveau ${niveau}<br/>
-    <strong>Type:</strong> ${typeSeance}<br/>
-    <strong>Effectif:</strong> ${effectif} étudiants<br/>
-    <strong>Date:</strong> ${jour}
-  `;
-  
-  const slotLabel = document.createElement("label");
-  slotLabel.textContent = "Sélectionner un créneau:";
-  slotLabel.style.cssText = "display:block;margin-bottom:8px;font-weight:bold;";
-  
-  const slotSelect = document.createElement("select");
-  slotSelect.style.cssText = "width:100%;padding:8px;margin-bottom:16px;border:1px solid #ddd;border-radius:4px;";
-  
-  // Ajouter les créneaux disponibles
-  const options = [
-    { value: "morning", text: "Matin (7:30 - 11:30)" },
-    { value: "afternoon", text: "Après-midi (12:30 - 16:30)" }
-  ];
-  
-  options.forEach(opt => {
-    const option = document.createElement("option");
-    option.value = opt.value;
-    option.textContent = opt.text;
-    slotSelect.appendChild(option);
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:10000;';
+  const content = document.createElement('div');
+  content.className = 'modal-content';
+  content.style.cssText = 'background:white;padding:20px;border-radius:8px;max-width:520px;width:100%;box-shadow:0 8px 24px rgba(0,0,0,0.12);';
+
+  const title = document.createElement('h3');
+  title.textContent = 'Programmer cours (sélectionner salle et enseignant)';
+  title.style.marginBottom = '12px';
+
+  const formWrap = document.createElement('div');
+  formWrap.style.display = 'grid';
+  formWrap.style.gridTemplateColumns = '1fr 1fr';
+  formWrap.style.gap = '10px';
+
+  // Room select
+  const roomLabel = document.createElement('label');
+  roomLabel.textContent = 'Salle:';
+  const roomSelect = document.createElement('select');
+  roomSelect.style.padding = '8px';
+  rooms.forEach(r => {
+    const o = document.createElement('option');
+    o.value = typeof r.id === 'string' ? r.id : String(r.id);
+    o.textContent = r.name || r.id;
+    roomSelect.appendChild(o);
   });
-  
-  const buttons = document.createElement("div");
-  buttons.style.cssText = "display:flex;gap:8px;justify-content:flex-end;";
-  
-  const cancelBtn = document.createElement("button");
-  cancelBtn.textContent = "Annuler";
-  cancelBtn.className = "btn";
-  cancelBtn.style.cssText = "padding:8px 16px;background:#f0f0f0;border:1px solid #ddd;border-radius:4px;cursor:pointer;";
-  cancelBtn.onclick = () => modal.remove();
-  
-  const confirmBtn = document.createElement("button");
-  confirmBtn.textContent = "Confirmer";
-  confirmBtn.className = "btn primary";
-  confirmBtn.style.cssText = "padding:8px 16px;background:#007bff;color:white;border:none;border-radius:4px;cursor:pointer;";
-  confirmBtn.onclick = () => {
-    const slot = slotSelect.value;
-    const day = jour ? new Date(jour).toLocaleDateString('fr-FR', { weekday: 'long' }) : "Lundi";
-    
+  if (preId && type === 'room') roomSelect.value = preId;
+
+  // Teacher select
+  const teacherLabel = document.createElement('label');
+  teacherLabel.textContent = 'Enseignant:';
+  const teacherSelect = document.createElement('select');
+  teacherSelect.style.padding = '8px';
+  teachers.forEach(t => {
+    const o = document.createElement('option');
+    o.value = typeof t.id === 'string' ? t.id : String(t.id);
+    o.textContent = t.name || t.matricule || t.id;
+    teacherSelect.appendChild(o);
+  });
+  if (preId && type === 'teacher') teacherSelect.value = preId;
+
+  // Slot select
+  const slotLabel = document.createElement('label');
+  slotLabel.textContent = 'Créneau:';
+  const slotSelect = document.createElement('select');
+  slotSelect.style.padding = '8px';
+  [['AM','07h30 – 11h30'],['PM','12h30 – 16h30']].forEach(s => {
+    const o = document.createElement('option'); o.value = s[0]; o.textContent = s[1]; slotSelect.appendChild(o);
+  });
+
+  // Duration input
+  const durLabel = document.createElement('label'); durLabel.textContent = 'Durée (heures):';
+  const durInput = document.createElement('input'); durInput.type = 'number'; durInput.value = 4; durInput.min = 1; durInput.style.padding='8px';
+
+  // Date display (readonly)
+  const dateLabel = document.createElement('label'); dateLabel.textContent = 'Date:';
+  const dateInput = document.createElement('input'); dateInput.type = 'date'; dateInput.value = jour; dateInput.style.padding='8px';
+
+  // assemble form grid (2x)
+  const left = document.createElement('div');
+  left.appendChild(roomLabel); left.appendChild(roomSelect);
+  const right = document.createElement('div');
+  right.appendChild(teacherLabel); right.appendChild(teacherSelect);
+  formWrap.appendChild(left); formWrap.appendChild(right);
+
+  const bottomRow = document.createElement('div'); bottomRow.style.gridColumn = '1 / -1'; bottomRow.style.display='flex'; bottomRow.style.gap='8px'; bottomRow.style.marginTop='10px';
+  const slotWrap = document.createElement('div'); slotWrap.style.flex='1'; slotWrap.appendChild(slotLabel); slotWrap.appendChild(slotSelect);
+  const durWrap = document.createElement('div'); durWrap.style.flex='1'; durWrap.appendChild(durLabel); durWrap.appendChild(durInput);
+  const dateWrap = document.createElement('div'); dateWrap.style.flex='1'; dateWrap.appendChild(dateLabel); dateWrap.appendChild(dateInput);
+  bottomRow.appendChild(slotWrap); bottomRow.appendChild(durWrap); bottomRow.appendChild(dateWrap);
+
+  const actions = document.createElement('div'); actions.style.display='flex'; actions.style.justifyContent='flex-end'; actions.style.gap='8px'; actions.style.marginTop='12px';
+  const cancel = document.createElement('button'); cancel.className='btn'; cancel.textContent='Annuler'; cancel.onclick = () => modal.remove();
+  const confirm = document.createElement('button'); confirm.className='btn primary'; confirm.textContent='Confirmer'; confirm.onclick = () => {
+    const chosenRoom = roomSelect.value; const chosenTeacher = teacherSelect.value; const slot = slotSelect.value; const duration = parseInt(durInput.value,10) || 4; const chosenDate = dateInput.value;
+    if (!chosenRoom || !chosenTeacher) { alert('Veuillez sélectionner la salle et l\'enseignant.'); return; }
+    const dayName = new Date(chosenDate).toLocaleDateString('fr-FR', { weekday: 'long' });
     const courseData = {
-      matiere,
-      filiere,
-      niveau,
-      type: typeSeance,
-      effectif,
-      [type === 'room' ? 'roomId' : 'teacherId']: id,
-      [type === 'room' ? 'roomName' : 'teacherName']: name
+      matiere, filiere, niveau, type: typeSeance, effectif, roomId: chosenRoom, roomName: rooms.find(r=>String(r.id)===String(chosenRoom))?.name || chosenRoom, teacherId: chosenTeacher, teacherName: teachers.find(t=>String(t.id)===String(chosenTeacher))?.name || chosenTeacher, durationHours: duration
     };
-    
-    const result = programCourse({
-      day: day.charAt(0).toUpperCase() + day.slice(1),
-      slotId: slot,
-      courseData
-    });
-    
-    if (result.ok) {
-      alert(`✓ ${type === 'room' ? 'Salle' : 'Enseignant'} programmé(e) avec succès!`);
-      modal.remove();
-      // Aller à la section emploi du temps
-      const timetableSection = document.getElementById("page-timetable");
-      if (timetableSection) {
-        timetableSection.scrollIntoView({ behavior: 'smooth' });
+    const dayKey = dayName.charAt(0).toUpperCase()+dayName.slice(1);
+    const result = programCourse({ day: dayKey, slotId: slot, courseData });
+    if (!result.ok) { alert('Erreur: '+result.reason); return; }
+
+    // send to server and revert on error
+    submitBookingToServer({ day: dayKey, slotId: slot, courseData }).then((res) => {
+      if (res.status === 200 && res.body && res.body.ok) {
+        alert('Cours programmé avec succès');
+        modal.remove();
+        const tt = document.getElementById('page-timetable'); if (tt) tt.scrollIntoView({behavior:'smooth'});
+      } else {
+        // revert in-memory booking and teacher hours
+        timetable[dayKey][slot] = null;
+        const t = teachers.find(t => String(t.id) === String(courseData.teacherId) || t.matricule === courseData.teacherId);
+        if (t) {
+          t.hoursDone = Math.max((t.hoursDone || 0) - duration, 0);
+          t.hoursRemaining = (t.hoursPlanned || 0) - t.hoursDone;
+        }
+        refreshTimetable();
+        refreshTeachersTable();
+        alert('Erreur serveur: ' + (res.body && (res.body.error || JSON.stringify(res.body)) ? (res.body.error || JSON.stringify(res.body)) : 'Unknown'));
       }
-    } else {
-      alert(`✗ Erreur: ${result.reason}`);
-    }
+    });
   };
-  
-  buttons.appendChild(cancelBtn);
-  buttons.appendChild(confirmBtn);
-  
-  content.appendChild(title);
-  content.appendChild(info);
-  content.appendChild(slotLabel);
-  content.appendChild(slotSelect);
-  content.appendChild(buttons);
-  
-  modal.appendChild(content);
-  document.body.appendChild(modal);
-  
-  // Fermer avec Échap
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") modal.remove();
-  });
+  actions.appendChild(cancel); actions.appendChild(confirm);
+
+  content.appendChild(title); content.appendChild(formWrap); content.appendChild(bottomRow); content.appendChild(actions);
+  modal.appendChild(content); document.body.appendChild(modal);
+  document.addEventListener('keydown', (e)=>{ if (e.key==='Escape') modal.remove(); });
 }
 
 // Attach form listener after DOM is ready
@@ -816,9 +900,36 @@ function openQuickScheduleModal(context) {
 
   if (!res.ok) {
     alert(`Programmation impossible : ${res.reason}`);
-  } else {
-    alert("Cours programmé avec succès dans l'emploi du temps.");
+    return;
   }
+
+  // post to server and revert on error
+  submitBookingToServer({ day, slotId, courseData: {
+    filiere: context.filiere,
+    niveau: context.niveau,
+    matiere: context.matiere,
+    type: context.type,
+    effectif: context.effectif,
+    date: context.date,
+    teacherId,
+    roomId,
+    durationHours,
+  }}).then((resp) => {
+    if (resp.status === 200 && resp.body && resp.body.ok) {
+      alert("Cours programmé avec succès dans l'emploi du temps.");
+    } else {
+      // revert
+      timetable[day][slotId] = null;
+      const t = teachers.find(t => String(t.id) === String(teacherId));
+      if (t) {
+        t.hoursDone = Math.max((t.hoursDone || 0) - durationHours, 0);
+        t.hoursRemaining = (t.hoursPlanned || 0) - t.hoursDone;
+      }
+      refreshTimetable();
+      refreshTeachersTable();
+      alert('Erreur serveur: ' + (resp.body && (resp.body.error || JSON.stringify(resp.body)) ? (resp.body.error || JSON.stringify(resp.body)) : 'Unknown'));
+    }
+  });
 }
 
 // Timetable rendering ----------------------------------------------------------
@@ -826,6 +937,17 @@ function openQuickScheduleModal(context) {
 function refreshTimetable() {
   const tbody = document.getElementById("timetableBody");
   tbody.innerHTML = "";
+  // Update date headers for current week
+  const dates = getWeekDates(new Date());
+  const dayIds = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+  dayIds.forEach((d,i) => {
+    const el = document.getElementById('date-'+d);
+    if (el) el.textContent = dates[i];
+  });
+
+  // ensure filter select is populated
+  populateTimetableRoomFilter();
+  const filterVal = document.getElementById('timetableRoomFilter')?.value || 'all';
 
   timetableSlots.forEach((slot) => {
     const tr = document.createElement("tr");
@@ -837,12 +959,19 @@ function refreshTimetable() {
       const td = document.createElement("td");
       const entry = timetable[day][slot.id];
       if (entry) {
-        td.className = "slot-cell";
-        td.innerHTML = `
-          <div class="slot-course">${entry.matiere} (${entry.type})</div>
-          <div class="slot-meta">${entry.filiere} • Niveau ${entry.niveau}</div>
-          <div class="slot-meta">${entry.roomName} • ${entry.teacherName}</div>
-        `;
+        // apply room filter: if filter is not 'all' and entry.roomId doesn't match, show empty
+        if (filterVal !== 'all' && String(entry.roomId) !== String(filterVal) && String(entry.roomName) !== String(filterVal)) {
+          td.className = "slot-cell";
+          td.style.color = "#9ca3af";
+          td.textContent = "—";
+        } else {
+          td.className = "slot-cell";
+          td.innerHTML = `
+            <div class="slot-course">${entry.matiere} (${entry.type})</div>
+            <div class="slot-meta">${entry.filiere} • Niveau ${entry.niveau}</div>
+            <div class="slot-meta">${entry.roomName} • ${entry.teacherName}</div>
+          `;
+        }
       } else {
         td.className = "slot-cell";
         td.style.color = "#9ca3af";

@@ -1,13 +1,13 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from .models import TimetableEntry, Teacher, Room
 import json
 from datetime import date
 import csv
 from io import TextIOWrapper
-from ml_utils.data_prep import parse_planning_file
+from ml_utils.data_prep import parse_planning_file, load_datasets, prepare_resources, prepare_teachers
 from ml_utils.dbscan_analyzer import (
     load_dbscan_model,
     prepare_analysis_features,
@@ -33,7 +33,75 @@ def index(request):
 
 
 @csrf_exempt
-@require_POST
+@require_http_methods(["GET"])
+def api_load_resources(request):
+  """Load all unique rooms/resources from the Datasets with their characteristics."""
+  try:
+    resources, teachers, courses = load_datasets()
+    res_prepared = prepare_resources(resources)
+    
+    # Return normalized room data
+    rooms_data = []
+    seen_ids = set()
+    
+    for _, row in res_prepared.iterrows():
+      room_id = row.get("Identifiant_ressource") or row.get("Id") or row.get("Nom_ressource", "room")
+      if room_id in seen_ids:
+        continue
+      seen_ids.add(room_id)
+      
+      rooms_data.append({
+        "id": str(room_id),
+        "name": str(row.get("Nom_ressource") or room_id),
+        "capacity": int(row.get("Capacite", 60)),
+        "type": str(row.get("Type_ressource", "Salle")),
+        "videoprojecteur": str(row.get("Videoprojecteur", "NON")),
+        "score": float(row.get("Score", 0.5)),
+      })
+    
+    return JsonResponse({"rooms": rooms_data})
+  except Exception as e:
+    return JsonResponse({"error": str(e)}, status=500)
+
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def api_load_teachers(request):
+  """Load all teachers from the Datasets with their characteristics."""
+  try:
+    resources, teachers, courses = load_datasets()
+    teachers_prepared = prepare_teachers(teachers, resources, courses)
+    
+    # Return normalized teacher data
+    teachers_data = []
+    seen_ids = set()
+    
+    for _, row in teachers_prepared.iterrows():
+      teacher_id = row.get("Matricule_enseignant") or row.get("id", "teacher")
+      if teacher_id in seen_ids:
+        continue
+      seen_ids.add(teacher_id)
+      
+      try:
+        hours_restantes = float(row.get("Heures_restantes", 0))
+      except Exception:
+        hours_restantes = 0.0
+      
+      teachers_data.append({
+        "id": str(teacher_id),
+        "name": str(row.get("Nom", f"Prof {teacher_id}")),
+        "specialite": str(row.get("Specialite", "N/A")),
+        "department": str(row.get("Departement", "N/A")),
+        "hoursRemaining": hours_restantes,
+        "anciennete": float(row.get("Anciennete", 0)),
+        "score_appreciation": float(row.get("Score_appreciation", 0)),
+      })
+    
+    return JsonResponse({"teachers": teachers_data})
+  except Exception as e:
+    return JsonResponse({"error": str(e)}, status=500)
+@csrf_exempt
+@require_http_methods(["POST"])
 def api_recommend(request):
   """
   Example endpoint if you want to call a Django backend from JS.

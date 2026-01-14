@@ -10,7 +10,41 @@ def _project_root():
 def load_datasets():
     root = _project_root()
     data_dir = root / "Datasets"
-    resources = pd.read_csv(data_dir / "Resources.csv")
+    resources_raw = pd.read_csv(data_dir / "Resources.csv")
+    # The raw file contains one row per scheduled use of a resource; normalize
+    # to one row per physical resource (Identifiant_ressource) to avoid
+    # duplicate recommendations of the same room multiple times.
+    if "Identifiant_ressource" in resources_raw.columns:
+        # aggregate sensible defaults: max capacity, any projecteur -> OUI,
+        # most frequent Type_cours and Filiere
+        def most_common(s):
+            try:
+                return s.mode().iloc[0]
+            except Exception:
+                return s.iloc[0] if len(s) else None
+
+        agg = {
+            "Type_ressource": "first",
+            "Capacite": "max",
+            "Videoprojecteur": lambda x: "OUI" if (x == "OUI").any() else "NON",
+            "Type_cours": most_common,
+            "Filiere": most_common,
+            "Nb_personnes": "max",
+        }
+
+        grouped = (
+            resources_raw.groupby("Identifiant_ressource", dropna=False)
+            .agg(agg)
+            .reset_index()
+            .rename(columns={"Identifiant_ressource": "Identifiant_ressource"})
+        )
+
+        # Create stable identifier/name fields expected by downstream code
+        grouped["Nom_ressource"] = grouped["Identifiant_ressource"]
+        grouped["Id"] = grouped["Identifiant_ressource"]
+        resources = grouped
+    else:
+        resources = pd.read_csv(data_dir / "Resources.csv")
     teachers = pd.read_csv(data_dir / "teachers.csv")
     courses = pd.read_csv(data_dir / "courses.csv")
     return resources, teachers, courses

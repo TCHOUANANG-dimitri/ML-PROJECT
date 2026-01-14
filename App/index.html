@@ -438,17 +438,23 @@
             <div class="card-header">
               <h2>Semaine académique</h2>
             </div>
-            <div class="table-wrapper timetable">
+              <div style="display:flex;gap:12px;align-items:center;margin:8px 0;">
+                <label style="font-size:13px;color:#374151;">Filtrer par salle:</label>
+                <select id="timetableRoomFilter" style="padding:6px;border:1px solid #ddd;border-radius:6px;">
+                  <option value="all">Toutes les salles</option>
+                </select>
+              </div>
+              <div class="table-wrapper timetable">
               <table class="table">
                 <thead>
                   <tr>
                     <th>Créneaux</th>
-                    <th>Lundi</th>
-                    <th>Mardi</th>
-                    <th>Mercredi</th>
-                    <th>Jeudi</th>
-                    <th>Vendredi</th>
-                    <th>Samedi</th>
+                      <th>Lundi<div class="day-date" id="date-Lundi" style="font-size:11px;color:#6b7280"></div></th>
+                      <th>Mardi<div class="day-date" id="date-Mardi" style="font-size:11px;color:#6b7280"></div></th>
+                      <th>Mercredi<div class="day-date" id="date-Mercredi" style="font-size:11px;color:#6b7280"></div></th>
+                      <th>Jeudi<div class="day-date" id="date-Jeudi" style="font-size:11px;color:#6b7280"></div></th>
+                      <th>Vendredi<div class="day-date" id="date-Vendredi" style="font-size:11px;color:#6b7280"></div></th>
+                      <th>Samedi<div class="day-date" id="date-Samedi" style="font-size:11px;color:#6b7280"></div></th>
                   </tr>
                 </thead>
                 <tbody id="timetableBody">
