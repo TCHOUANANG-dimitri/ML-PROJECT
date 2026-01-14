@@ -1,0 +1,525 @@
+correspondante pour chaque niveau
+Jan 11
+📚 LISTE COMPLÈTE : FILIÈRES → MATIÈRES PAR NIVEAU
+🎓 TRONC COMMUN (Tous cursus - Niveaux 1 & 2)
+NIVEAU 1
+Matière	Spécialité	CM	TD	TP
+Mathématiques Générales I	Mathématiques	40h	30h	10h
+Physique Générale I	Physique	40h	20h	10h
+Chimie Générale	Chimie	30h	15h	15h
+Informatique de base	Informatique	20h	20h	20h
+Algèbre Linéaire	Mathématiques	35h	25h	0h
+Mécanique du point	Physique	30h	15h	5h
+Communication	Général	20h	20h	0h
+Dessin technique	Général	15h	15h	10h
+NIVEAU 2
+Matière	Spécialité	CM	TD	TP
+Mathématiques Générales II	Mathématiques	40h	30h	10h
+Physique Générale II	Physique	40h	20h	10h
+Électricité	Physique	30h	15h	15h
+Programmation C	Informatique	20h	20h	20h
+Analyse Numérique	Mathématiques	25h	20h	5h
+Thermodynamique	Physique	30h	15h	5h
+Probabilités et Statistiques	Mathématiques	30h	20h	10h
+Anglais technique	Général	20h	20h	0h
+💻 FILIÈRE GIT (Génie Informatique et Télécoms)
+NIVEAU 3
+Matière	Spécialité	CM	TD	TP
+Algorithmique Avancée	Informatique	20h	16h	12h
+Bases de données	Informatique	24h	16h	12h
+Réseaux et Protocoles	Réseaux	24h	12h	16h
+Génie Logiciel	Informatique	20h	20h	8h
+Systèmes d'exploitation	Systèmes	20h	16h	12h
+Architecture des ordinateurs	Systèmes	24h	16h	8h
+Programmation orientée objet	Programmation	20h	12h	16h
+Mathématiques pour l'informatique	Mathématiques	28h	20h	0h
+NIVEAU 4
+Matière	Spécialité	CM	TD	TP
+Sécurité informatique	Réseaux	24h	16h	12h
+Développement web	Programmation	20h	12h	20h
+Intelligence Artificielle	IA	28h	16h	16h
+Réseaux avancés	Réseaux	24h	12h	16h
+Systèmes distribués	Systèmes	24h	16h	12h
+Compilation	Informatique	28h	16h	8h
+Administration systèmes	Systèmes	20h	12h	16h
+Gestion de projets informatiques	Informatique	24h	20h	4h
+NIVEAU 5
+Matière	Spécialité	CM	TD	TP
+Cloud Computing	Systèmes	24h	12h	16h
+Cybersécurité	Réseaux	28h	16h	16h
+Architecture logicielle	Informatique	24h	20h	8h
+Blockchain	Informatique	24h	12h	16h
+IoT et systèmes embarqués	Systèmes	24h	12h	16h
+DevOps	Systèmes	20h	12h	20h
+Big Data et Analytics	Informatique	28h	16h	16h
+Entrepreneuriat Tech	Général	20h	24h	0h
+🤖 FILIÈRE SDIA (Science des Données et IA)
+NIVEAU 3
+Matière	Spécialité	CM	TD	TP
+Machine Learning	IA	28h	16h	20h
+Data Mining	IA	24h	16h	20h
+Statistiques Avancées	Mathématiques	28h	20h	4h
+Programmation Python	Programmation	20h	12h	20h
+Bases de données NoSQL	Informatique	24h	16h	12h
+Algèbre linéaire appliquée	Mathématiques	28h	20h	4h
+Visualisation de données	Informatique	20h	12h	16h
+Collecte et traitement de données	Informatique	24h	16h	12h
+NIVEAU 4
+Matière	Spécialité	CM	TD	TP
+Deep Learning	IA	28h	12h	20h
+Big Data	Informatique	24h	12h	20h
+Traitement automatique des langues	IA	28h	16h	16h
+Vision par ordinateur	IA	28h	12h	20h
+Optimisation	Mathématiques	28h	20h	4h
+Séries temporelles	Mathématiques	24h	16h	12h
+Apprentissage par renforcement	IA	28h	12h	20h
+Éthique de l'IA	Général	20h	20h	0h
+NIVEAU 5
+Matière	Spécialité	CM	TD	TP
+IA Générative	IA	28h	12h	20h
+MLOps	Informatique	24h	12h	16h
+Recommandation Systems	IA	24h	16h	16h
+Graph Neural Networks	IA	28h	12h	20h
+IA Explicable	IA	24h	16h	12h
+Data Engineering	Informatique	24h	12h	20h
+Recherche opérationnelle	Mathématiques	28h	20h	4h
+Projet de fin d'études	IA	20h	0h	40h
+🏗️ FILIÈRE GCI (Génie Civil)
+NIVEAU 3
+Matière	Spécialité	CM	TD	TP
+Résistance des Matériaux	Structures	28h	24h	8h
+Mécanique des sols	Géotechnique	28h	16h	12h
+Topographie	Géotechnique	20h	16h	16h
+Matériaux de construction	Structures	24h	16h	12h
+Hydraulique générale	Hydraulique	28h	16h	12h
+Dessin assisté par ordinateur	Général	16h	8h	24h
+Béton armé I	Structures	32h	24h	8h
+Géotechnique I	Géotechnique	28h	16h	12h
+NIVEAU 4
+Matière	Spécialité	CM	TD	TP
+Béton armé II	Structures	32h	24h	8h
+Structures Métalliques	Structures	32h	20h	8h
+Géotechnique II	Géotechnique	28h	16h	12h
+Hydraulique appliquée	Hydraulique	28h	16h	12h
+Routes et terrassements	Structures	28h	20h	12h
+Calcul des structures	Structures	32h	24h	8h
+Ouvrages d'art	Structures	28h	20h	12h
+VRD	Hydraulique	24h	16h	12h
+NIVEAU 5
+Matière	Spécialité	CM	TD	TP
+Construction métallique avancée	Structures	32h	20h	8h
+Dynamique des structures	Structures	28h	20h	12h
+Fondations spéciales	Géotechnique	28h	16h	12h
+Barrages	Hydraulique	28h	20h	12h
+Pathologie des constructions	Structures	24h	20h	8h
+BIM et maquette numérique	Général	20h	12h	20h
+Gestion de chantier	Général	24h	24h	4h
+Projet de fin d'études	Structures	20h	0h	40h
+⚙️ FILIÈRE GM (Génie Mécanique)
+NIVEAU 3
+Matière	Spécialité	CM	TD	TP
+Mécanique des Fluides	Mécanique	28h	20h	12h
+Thermodynamique Appliquée	Thermodynamique	28h	16h	12h
+Résistance des matériaux	Mécanique	28h	24h	8h
+Matériaux métalliques	Matériaux	24h	16h	12h
+Dessin industriel	Général	16h	12h	20h
+Méthodes de fabrication	Mécanique	24h	16h	16h
+CAO/DAO	Mécanique	16h	12h	20h
+Métrologie	Mécanique	20h	16h	12h
+NIVEAU 4
+Matière	Spécialité	CM	TD	TP
+Mécanique Vibratoire	Mécanique	24h	20h	8h
+Transfert thermique	Thermodynamique	28h	16h	12h
+Matériaux Composites	Matériaux	24h	16h	12h
+Machines thermiques	Thermodynamique	28h	16h	12h
+Fabrication mécanique	Mécanique	24h	12h	20h
+Tribologie	Mécanique	24h	16h	12h
+Éléments de machines	Mécanique	24h	20h	8h
+Automatisation industrielle	Systèmes	24h	12h	16h
+NIVEAU 5
+Matière	Spécialité	CM	TD	TP
+Turbomachines	Thermodynamique	28h	16h	12h
+Maintenance industrielle	Mécanique	24h	16h	12h
+Énergies renouvelables	Énergie	24h	16h	12h
+Simulation numérique	Mécanique	24h	12h	20h
+Optimisation en mécanique	Mécanique	24h	20h	8h
+Production et gestion	Général	24h	20h	4h
+Conception avancée	Mécanique	24h	16h	12h
+Projet de fin d'études	Mécanique	20h	0h	40h
+🧪 FILIÈRE GPR (Génie des Procédés)
+NIVEAU 3
+Matière	Spécialité	CM	TD	TP
+Chimie Organique	Chimie	28h	16h	16h
+Chimie analytique	Chimie	24h	16h	16h
+Thermodynamique chimique	Chimie	28h	16h	8h
+Opérations unitaires	Procédés industriels	28h	20h	16h
+Bilans matière et énergie	Procédés industriels	28h	24h	8h
+Cinétique chimique	Chimie	28h	20h	12h
+Chimie physique	Chimie	28h	16h	12h
+Instrumentation	Général	20h	12h	16h
+NIVEAU 4
+Matière	Spécialité	CM	TD	TP
+Génie Chimique	Chimie	28h	16h	16h
+Procédés Industriels	Procédés industriels	28h	20h	16h
+Catalyse	Chimie	24h	16h	12h
+Contrôle des procédés	Procédés industriels	24h	16h	16h
+Séparation et purification	Procédés industriels	28h	16h	16h
+Réacteurs chimiques	Chimie	28h	20h	12h
+Chimie industrielle	Chimie	28h	16h	16h
+Pétrochimie	Chimie	24h	16h	12h
+NIVEAU 5
+Matière	Spécialité	CM	TD	TP
+Sécurité des Procédés	Procédés industriels	24h	16h	8h
+Génie enzymatique	Chimie	24h	12h	16h
+Optimisation des procédés	Procédés industriels	28h	20h	12h
+Chimie verte	Chimie	24h	16h	12h
+Modélisation des procédés	Procédés industriels	28h	16h	16h
+Traitement des effluents	Environnement	24h	16h	12h
+Économie des procédés	Général	24h	20h	4h
+Projet de fin d'études	Procédés industriels	20h	0h	40h
+⚡ FILIÈRE GE (Génie Énergétique)
+NIVEAU 3
+Matière	Spécialité	CM	TD	TP
+Thermodynamique énergétique	Thermique	28h	20h	12h
+Électrotechnique	Électrique	28h	16h	16h
+Transfert thermique	Thermique	28h	16h	12h
+Machines électriques	Électrique	28h	16h	16h
+Combustion	Énergie	24h	16h	12h
+Mesures énergétiques	Énergie	20h	12h	16h
+Énergétique du bâtiment	Thermique	24h	16h	12h
+Mathématiques de l'énergie	Mathématiques	28h	20h	4h
+NIVEAU 4
+Matière	Spécialité	CM	TD	TP
+Énergies Renouvelables	Énergie	28h	16h	16h
+Systèmes Électriques	Électrique	24h	20h	16h
+Conversion d'Énergie	Énergie	24h	20h	12h
+Centrales électriques	Électrique	28h	16h	12h
+Énergie solaire	Énergie	24h	16h	16h
+Énergie éolienne	Énergie	24h	16h	16h
+Stockage de l'énergie	Énergie	24h	16h	12h
+Régulation et automatismes	Systèmes	24h	12h	16h
+NIVEAU 5
+Matière	Spécialité	CM	TD	TP
+Smart Grids	Électrique	24h	16h	12h
+Thermique du Bâtiment	Thermique	28h	16h	12h
+Efficacité énergétique	Énergie	24h	20h	8h
+Turbomachines	Thermique	28h	16h	12h
+Modélisation énergétique	Énergie	24h	16h	16h
+Économie de l'énergie	Énergie	24h	20h	4h
+Audit énergétique	Énergie	24h	16h	12h
+Projet de fin d'études	Énergie	20h	0h	40h
+🔌 FILIÈRE GESI (Génie Électrique et Systèmes Intelligents)
+NIVEAU 3
+Matière	Spécialité	CM	TD	TP
+Électronique analogique	Électronique	24h	16h	16h
+Électronique numérique	Électronique	24h	16h	16h
+Traitement du signal	Systèmes	28h	16h	12h
+Systèmes logiques	Électronique	24h	16h	12h
+Automatique	Systèmes	28h	20h	12h
+Mesures électroniques	Électronique	20h	12h	16h
+Mathématiques pour l'électronique	Mathématiques	28h	20h	4h
+Programmation embarquée	Programmation	20h	12h	20h
+NIVEAU 4
+Matière	Spécialité	CM	TD	TP
+Électronique de puissance	Électronique	28h	16h	16h
+Microcontrôleurs	Électronique	24h	12h	20h
+Commande numérique	Systèmes	24h	16h	16h
+Systèmes embarqués	Systèmes	24h	12h	20h
+Capteurs et actionneurs	Électronique	24h	16h	16h
+Traitement numérique du signal	Systèmes	28h	16h	16h
+Automatismes industriels	Systèmes	24h	12h	20h
+FPGA et circuits programmables	Électronique	24h	12h	20h
+NIVEAU 5
+Matière	Spécialité	CM	TD	TP
+Robotique	Systèmes	24h	12h	20h
+Systèmes intelligents	IA	28h	16h	16h
+Internet des objets	Systèmes	24h	12h	20h
+Vision industrielle	IA	24h	12h	20h
+Commande avancée	Systèmes	28h	16h	12h
+Intelligence Artificielle embarquée	IA	28h	12h	20h
+Supervision industrielle	Systèmes	24h	16h	12h
+Projet de fin d'études	Systèmes	20h	0h	40h
+🚢 FILIÈRE GMP (Génie Maritime et Portuaire)
+NIVEAU 3
+Matière	Spécialité	CM	TD	TP
+Architecture navale	Maritime	28h	20h	12h
+Hydrodynamique	Maritime	28h	20h	12h
+Mécanique navale	Maritime	28h	20h	12h
+Matériaux maritimes	Matériaux	24h	16h	12h
+Dessin naval	Général	16h	12h	20h
+Navigation maritime	Maritime	24h	16h	12h
+Résistance des structures marines	Maritime	28h	20h	8h
+Océanographie	Général	24h	16h	8h
+NIVEAU 4
+Matière	Spécialité	CM	TD	TP
+Propulsion marine	Maritime	28h	16h	16h
+Structures offshore	Maritime	28h	20h	12h
+Équipements portuaires	Portuaire	24h	16h	16h
+Corrosion marine	Maritime	24h	16h	12h
+Stabilité des navires	Maritime	28h	20h	12h
+Installations portuaires	Portuaire	24h	16h	12h
+Systèmes navals	Maritime	24h	16h	16h
+Droit maritime	Général	24h	20h	0h
+NIVEAU 5
+Matière	Spécialité	CM	TD	TP
+Logistique portuaire	Portuaire	24h	20h	8h
+Gestion portuaire	Portuaire	24h	20h	8h
+Construction navale avancée	Maritime	28h	16h	12h
+Énergies marines	Énergie	24h	16h	12h
+Sécurité maritime	Maritime	24h	16h	8h
+Exploitation portuaire	Portuaire	24h	20h	8h
+Maintenance navale	Maritime	24h	16h	12h
+Projet de fin d'études	Maritime	20h	0h	40h
+🚗 FILIÈRE GAM (Génie Automobile et Mécatronique)
+NIVEAU 3
+Matière	Spécialité	CM	TD	TP
+Motorisation automobile	Automobile	28h	16h	16h
+Mécatronique	Mécatronique	24h	16h	16h
+Systèmes automobiles	Automobile	24h	20h	12h
+Électronique automobile	Mécatronique	24h	16h	16h
+Résistance des matériaux auto	Automobile	28h	20h	8h
+Dessin automobile	Général	16h	12h	20h
+Matériaux automobiles	Matériaux	24h	16h	12h
+Capteurs et actionneurs auto	Mécatronique	24h	12h	16h
+NIVEAU 4
+Matière	Spécialité	CM	TD	TP
+Dynamique du véhicule	Automobile	28h	20h	12h
+Transmission automobile	Automobile	28h	16h	16h
+Systèmes de contrôle	Mécatronique	24h	16h	16h
+Électronique embarquée	Mécatronique	24h	12h	20h
+Sécurité automobile	Automobile	24h	16h	12h
+Thermique automobile	Thermodynamique	24h	16h	12h
+Suspension et direction	Automobile	24h	16h	16h
+Réseaux automobiles	Mécatronique	24h	12h	16h
+NIVEAU 5
+Matière	Spécialité	CM	TD	TP
+Véhicules électriques	Automobile	28h	16h	16h
+Véhicules autonomes	Mécatronique	28h	12h	20h
+Diagnostic automobile	Automobile	24h	12h	20h
+Conception automobile	Automobile	24h	16h	16h
+Optimisation énergétique	Énergie	24h	16h	12h
+Ergonomie et confort	Automobile	20h	16h	12h
+Gestion de production auto	Général	24h	20h	4h
+Projet de fin d'études	Automobile	20h	0h	40h
+✅ FILIÈRE GQHSE (Qualité, Hygiène, Sécurité, Environnement)
+NIVEAU 3
+Matière	Spécialité	CM	TD	TP
+Management de la qualité	Qualité	24h	20h	8h
+Sécurité industrielle	Sécurité	24h	16h	12h
+Chimie de l'environnement	Environnement	24h	16h	12h
+Hygiène industrielle	Sécurité	24h	16h	12h
+Normes ISO	Qualité	24h	20h	8h
+Métrologie qualité	Qualité	20h	16h	12h
+Droit du travail	Général	24h	20h	0h
+Statistiques qualité	Mathématiques	24h	20h	8h
+NIVEAU 4
+Matière	Spécialité	CM	TD	TP
+Évaluation des risques	Sécurité	24h	20h	8h
+Audit qualité	Qualité	24h	16h	12h
+Gestion environnementale	Environnement	24h	16h	12h
+Toxicologie industrielle	Environnement	24h	16h	12h
+Systèmes de management	Qualité	24h	20h	8h
+Analyse des défaillances	Qualité	24h	16h	12h
+Protection incendie	Sécurité	24h	16h	12h
+Gestion des déchets	Environnement	24h	16h	12h
+NIVEAU 5
+Matière	Spécialité	CM	TD	TP
+Management intégré QHSE	Qualité	24h	20h	8h
+Droit de l'environnement	Environnement	24h	20h	0h
+Responsabilité sociétale	Environnement	20h	20h	0h
+Sûreté de fonctionnement	Sécurité	24h	16h	12h
+Excellence opérationnelle	Qualité	24h	20h	8h
+Risques psychosociaux	Sécurité	20h	20h	4h
+Développement durable	Environnement	24h	20h	4h
+Projet de fin d'études	Qualité	20h	0h	40h
+🌤️ FILIÈRE MÉTÉOROLOGIE
+NIVEAU 3
+Matière	Spécialité	CM	TD	TP
+Météorologie dynamique	Météorologie	28h	20h	12h
+Physique de l'atmosphère	Météorologie	28h	16h	12h
+Observations météorologiques	Météorologie	20h	12h	20h
+Instruments météorologiques	Météorologie	20h	12h	16h
+Mathématiques météo	Mathématiques	28h	20h	4h
+Climatologie générale	Climatologie	24h		
+
+Continue
+Jan 11
+
+16h | 12h |
+| Thermodynamique atmosphérique | Physique | 28h | 16h | 8h |
+| Statistiques météorologiques | Mathématiques | 24h | 20h | 8h |
+NIVEAU 4
+Matière	Spécialité	CM	TD	TP
+Prévision numérique	Météorologie	28h	16h	16h
+Météorologie satellitaire	Météorologie	24h	12h	20h
+Météorologie tropicale	Météorologie	28h	16h	12h
+Climatologie dynamique	Climatologie	28h	16h	12h
+Rayonnement atmosphérique	Météorologie	24h	16h	12h
+Microphysique des nuages	Météorologie	24h	16h	12h
+Radar et télédétection	Météorologie	24h	12h	16h
+Modèles atmosphériques	Météorologie	28h	16h	16h
+NIVEAU 5
+Matière	Spécialité	CM	TD	TP
+Changements climatiques	Climatologie	28h	20h	12h
+Modélisation climatique	Climatologie	28h	16h	16h
+Prévision saisonnière	Météorologie	24h	16h	12h
+Météorologie aéronautique	Météorologie	24h	16h	12h
+Hydrométéorologie	Météorologie	24h	16h	12h
+Assimilation de données	Météorologie	24h	16h	16h
+Communication météo	Général	20h	20h	4h
+Projet de fin d'études	Météorologie	20h	0h	40h
+🔬 FILIÈRE MEMA (Mécanique des Matériaux) - SCI ING
+NIVEAU 3
+Matière	Spécialité	CM	TD	TP
+Science des matériaux	Matériaux	28h	16h	16h
+Métallurgie	Matériaux	28h	16h	16h
+Mécanique des milieux continus	Mécanique	28h	20h	8h
+Caractérisation des matériaux	Matériaux	24h	12h	20h
+Chimie des matériaux	Chimie	24h	16h	12h
+Cristallographie	Matériaux	24h	16h	12h
+Mathématiques appliquées	Mathématiques	28h	20h	4h
+Thermodynamique des matériaux	Thermodynamique	24h	16h	8h
+NIVEAU 4
+Matière	Spécialité	CM	TD	TP
+Mécanique de la rupture	Mécanique	28h	20h	12h
+Matériaux avancés	Matériaux	28h	16h	16h
+Corrosion	Matériaux	24h	16h	16h
+Traitements thermiques	Matériaux	24h	16h	16h
+Matériaux polymères	Matériaux	24h	16h	16h
+Élaboration des matériaux	Matériaux	28h	16h	16h
+Fatigue des matériaux	Mécanique	24h	16h	12h
+Microscopie	Matériaux	20h	8h	20h
+NIVEAU 5
+Matière	Spécialité	CM	TD	TP
+Nanomatériaux	Matériaux	28h	16h	16h
+Endommagement des matériaux	Mécanique	28h	20h	12h
+Matériaux composites avancés	Matériaux	28h	16h	16h
+Simulation des matériaux	Matériaux	24h	12h	20h
+Biomaterials	Matériaux	24h	16h	12h
+Recyclage et écoconception	Environnement	24h	16h	12h
+Matériaux intelligents	Matériaux	24h	16h	12h
+Projet de fin d'études	Matériaux	20h	0h	40h
+🧬 FILIÈRE CIBI (Chimie Industrielle et Biochimie) - SCI ING
+NIVEAU 3
+Matière	Spécialité	CM	TD	TP
+Chimie industrielle	Chimie	28h	16h	16h
+Biochimie structurale	Chimie	28h	16h	16h
+Chimie organique industrielle	Chimie	28h	16h	16h
+Microbiologie	Chimie	24h	16h	16h
+Analyse chimique	Chimie	24h	16h	16h
+Chimie physique appliquée	Chimie	28h	16h	12h
+Mathématiques pour chimistes	Mathématiques	28h	20h	4h
+Sécurité chimique	Sécurité	20h	16h	8h
+NIVEAU 4
+Matière	Spécialité	CM	TD	TP
+Biotechnologie	Chimie	28h	16h	20h
+Chimie verte	Chimie	24h	16h	16h
+Fermentation industrielle	Chimie	24h	16h	20h
+Chimie pharmaceutique	Chimie	28h	16h	16h
+Enzymologie	Chimie	24h	16h	16h
+Génie biochimique	Chimie	28h	20h	16h
+Chimie des polymères	Chimie	28h	16h	16h
+Biocatalyse	Chimie	24h	16h	16h
+NIVEAU 5
+Matière	Spécialité	CM	TD	TP
+Microbiologie industrielle	Chimie	28h	16h	20h
+Bioraffinerie	Chimie	24h	16h	16h
+Cosmétique industrielle	Chimie	24h	16h	16h
+Agroalimentaire	Chimie	24h	16h	16h
+Bioinformatique	Informatique	24h	12h	16h
+Valorisation des biomasses	Chimie	24h	16h	16h
+Réglementation pharmaceutique	Général	24h	20h	0h
+Projet de fin d'études	Chimie	20h	0h	40h
+🌍 FILIÈRE GEE (Géophysique Eau et Environnement) - SCI ING
+NIVEAU 3
+Matière	Spécialité	CM	TD	TP
+Géophysique appliquée	Géophysique	28h	20h	16h
+Géologie générale	Géophysique	28h	16h	12h
+Hydrogéologie	Géophysique	28h	16h	16h
+Chimie de l'eau	Chimie	24h	16h	16h
+Mathématiques géophysiques	Mathématiques	28h	20h	4h
+Pétrographie	Géophysique	24h	16h	16h
+Topographie et cartographie	Général	20h	16h	16h
+Physique de la Terre	Physique	28h	16h	12h
+NIVEAU 4
+Matière	Spécialité	CM	TD	TP
+Géophysique pétrolière	Géophysique	28h	16h	16h
+Ressources en eau	Géophysique	28h	20h	12h
+Traitement des eaux	Environnement	24h	16h	20h
+Pollution des sols	Environnement	24h	16h	16h
+Géotechnique environnementale	Géophysique	28h	16h	16h
+Prospection géophysique	Géophysique	28h	16h	20h
+Sismologie	Géophysique	28h	20h	12h
+SIG et télédétection	Informatique	20h	12h	20h
+NIVEAU 5
+Matière	Spécialité	CM	TD	TP
+Gestion des ressources naturelles	Environnement	24h	20h	8h
+Géologie de l'environnement	Géophysique	28h	16h	12h
+Modélisation géophysique	Géophysique	28h	16h	20h
+Risques géologiques	Géophysique	24h	16h	12h
+Hydrogéologie avancée	Géophysique	28h	16h	16h
+Géothermie	Énergie	24h	16h	16h
+Droit de l'environnement	Général	24h	20h	0h
+Projet de fin d'études	Géophysique	20h	0h	40h
+⚡ FILIÈRE ENERGIE - SCI ING
+NIVEAU 3
+Matière	Spécialité	CM	TD	TP
+Physique énergétique	Énergie	28h	20h	12h
+Thermodynamique énergétique	Thermique	28h	20h	12h
+Énergies fossiles	Énergie	24h	16h	12h
+Électricité et magnétisme	Physique	28h	16h	16h
+Mathématiques de l'énergie	Mathématiques	28h	20h	4h
+Chimie énergétique	Chimie	24h	16h	12h
+Mesures énergétiques	Énergie	20h	12h	16h
+Mécanique des fluides	Mécanique	28h	16h	12h
+NIVEAU 4
+Matière	Spécialité	CM	TD	TP
+Énergies alternatives	Énergie	28h	16h	16h
+Stockage de l'énergie	Énergie	28h	16h	16h
+Modélisation énergétique	Énergie	28h	16h	20h
+Économie de l'énergie	Énergie	24h	20h	4h
+Bilan énergétique	Énergie	28h	20h	12h
+Réacteurs nucléaires	Énergie	28h	16h	12h
+Conversion photovoltaïque	Énergie	24h	16h	16h
+Pile à combustible	Énergie	24h	16h	16h
+NIVEAU 5
+Matière	Spécialité	CM	TD	TP
+Transition énergétique	Énergie	28h	20h	8h
+Systèmes énergétiques hybrides	Énergie	28h	16h	16h
+Optimisation énergétique	Énergie	28h	20h	12h
+Fusion nucléaire	Énergie	24h	16h	8h
+Énergies marines	Énergie	24h	16h	16h
+Prospective énergétique	Énergie	24h	20h	4h
+Politique énergétique	Général	24h	20h	0h
+Projet de fin d'études	Énergie	20h	0h	40h
+📡 FILIÈRE EEAT (Électronique, Électrotechnique, Automatique, Télécommunications) - SCI ING
+NIVEAU 3
+Matière	Spécialité	CM	TD	TP
+Électronique analogique	Électronique	24h	16h	20h
+Électronique numérique	Électronique	24h	16h	20h
+Électrotechnique	Électrique	28h	16h	16h
+Traitement du signal	Systèmes	28h	16h	16h
+Mathématiques pour l'électronique	Mathématiques	28h	20h	4h
+Physique des semi-conducteurs	Physique	28h	16h	12h
+Mesures électroniques	Électronique	20h	12h	20h
+Programmation systèmes	Programmation	20h	12h	20h
+NIVEAU 4
+Matière	Spécialité	CM	TD	TP
+Automatismes industriels	Systèmes	24h	16h	20h
+Télécommunications avancées	Télécommunications	28h	16h	16h
+Traitement numérique du signal	Systèmes	28h	16h	20h
+Machines électriques	Électrique	28h	16h	16h
+Réseaux de télécommunications	Télécommunications	28h	16h	16h
+Électronique de puissance	Électronique	28h	16h	16h
+Systèmes embarqués	Systèmes	24h	12h	20h
+Antennes et propagation	Télécommunications	24h	16h	16h
+NIVEAU 5
+Matière	Spécialité	CM	TD	TP
+Régulation automatique	Systèmes	28h	16h	16h
+Systèmes de transmission	Télécommunications	28h	16h	20h
+Fibres optiques	Télécommunications	24h	16h	16h
+Commande optimale	Systèmes	28h	20h	12h
+Télécommunications spatiales	Télécommunications	24h	16h	12h
+Réseaux mobiles 5G	Télécommunications	28h	16h	16h
+Compatibilité électromagnétique	Électronique	24h	16h	12h
+Projet de fin d'études	Télécommunications	20h	0h	40h

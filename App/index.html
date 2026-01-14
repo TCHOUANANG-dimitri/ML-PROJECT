@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Application de prédiction des performances académiques des étudiants</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="/static/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+  <div id="app">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo" id="sidebarLogo" title="Polytechnique">
+        <img src="/enspd.jpg" alt="ENSPD" />
+      </div>
+      <nav class="sidebar-nav">
+        <button class="sidebar-item active" data-page="dashboard" aria-label="Tableau de bord académique">
+          <span class="icon">📊</span>
+          <span class="label">Tableau de bord</span>
+        </button>
+        <button class="sidebar-item" data-page="recommendation" aria-label="Recommandation &amp; Planification intelligente">
+          <span class="icon">🧠</span>
+          <span class="label">Recommandation</span>
+        </button>
+        <button class="sidebar-item" data-page="timetable" aria-label="Emploi du temps">
+          <span class="icon">📅</span>
+          <span class="label">Emploi du temps</span>
+        </button>
+        <button class="sidebar-item" data-page="teachers" aria-label="Suivi des enseignants">
+          <span class="icon">👨‍🏫</span>
+          <span class="label">Enseignants</span>
+        </button>
+        <button class="sidebar-item" data-page="prediction" aria-label="Prédiction académique">
+          <span class="icon">📈</span>
+          <span class="label">Prédiction</span>
+        </button>
+        <button class="sidebar-item" data-page="analysis" aria-label="Analyse des performances">
+          <span class="icon">🔎</span>
+          <span class="label">Analyse</span>
+        </button>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <!-- HEADER -->
+      <header class="header">
+        <div class="header-left">
+          <img src="/enspd.jpg" alt="ENSPD" class="header-logo" />
+          <div class="header-title">
+            Application de prédiction des performances académiques des étudiants
+          </div>
+        </div>
+        <div class="header-right">
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <main class="content">
+        <!-- DASHBOARD -->
+        <section class="page page-dashboard active" id="page-dashboard" aria-label="Tableau de bord académique">
+          <h1 class="page-title">Tableau de bord académique</h1>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-header">
+                <h2>Liste des étudiants</h2>
+                <label class="btn ghost" style="margin-left:auto;">
+                  Importer CSV / Excel
+                  <input type="file" id="studentFileInput" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" hidden />
+                </label>
+              </div>
+
+              <div class="card-help">
+                Fichier attendu : colonnes Matricule;Nom;Filière;Niveau;Moyenne;Statut — le séparateur peut être ; ou ,
+              </div>
+
+              <div class="table-wrapper" style="margin-top:8px;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Matricule</th>
+                      <th>Niveau</th>
+                      <th>Filière</th>
+                      <th>Moyenne annuelle</th>
+                      <th>Matières validées</th>
+                      <th>Heures présence</th>
+                      <th>Nb projets</th>
+                    </tr>
+                  </thead>
+                  <tbody id="studentTableBody">
+                    <!-- Rempli par JS (données fictives ou import) -->
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="mini-charts" style="margin-top:12px;">
+                <div class="mini-chart">
+                  <div class="mini-chart-title">Répartition par filière</div>
+                  <canvas id="chartMajors" width="300" height="180"></canvas>
+                </div>
+                <div class="mini-chart">
+                  <div class="mini-chart-title">Distribution des moyennes</div>
+                  <canvas id="chartAverages" width="300" height="180"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h2>Indicateurs globaux</h2>
+              </div>
+              <div class="stats-grid">
+                <div class="stat">
+                  <div class="stat-label">Total étudiants</div>
+                  <div class="stat-value" id="statTotalStudents">–</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-label">Moyenne générale</div>
+                  <div class="stat-value" id="statGeneralAverage">– / 20</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-label">Taux de réussite</div>
+                  <div class="stat-value" id="statSuccessRate">– %</div>
+                </div>
+              </div>
+
+              <div class="mini-charts">
+                <div class="mini-chart">
+                  <div class="mini-chart-title">Répartition par filière</div>
+                  <div class="mini-chart-placeholder">Graphique circulaire (exemple)</div>
+                </div>
+                <div class="mini-chart">
+                  <div class="mini-chart-title">Distribution des moyennes</div>
+                  <div class="mini-chart-placeholder">Diagramme en barres (exemple)</div>
+                </div>
+              </div>
+
+              <div class="dashboard-actions">
+                <button class="btn primary" data-page-target="prediction">Prédiction des notes &amp; réussite</button>
+                <button class="btn ghost" data-page-target="recommendation">Recommandation de cours &amp; salles</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <script>
+          // MATIERES_BY_LEVEL and MATIERES_MAP provided by view as JSON strings
+          const MATIERES_BY_LEVEL = {matieres_by_level_json,safe };
+          const MATIERES_MAP = {materes_json,safe };
+
+          function getAllMatieres() {
+            const all = [];
+            for (const k in MATIERES_MAP) {
+              if (Array.isArray(MATIERES_MAP[k])) MATIERES_MAP[k].forEach(m => all.push(m));
+            }
+            // unique
+            return [...new Set(all)].filter(Boolean).sort();
+          }
+
+          function updateMatieres() {
+            const fil = document.getElementById('filiere');
+            const niveau = document.getElementById('niveau');
+            const sel = document.getElementById('nom_matiere');
+            const lvlNum = niveau.value ? parseInt(niveau.value, 10) : null;
+            
+            // Pour niveau 1 et 2: forcer TRONC_COMMUN et désactiver filière
+            if (lvlNum === 1 || lvlNum === 2) {
+              fil.value = 'TRONC_COMMUN';
+              fil.disabled = true;
+            } else {
+              fil.disabled = false;
+            }
+            
+            sel.innerHTML = '<option value="">Choisir une matière</option>';
+            let list = [];
+            
+            if (lvlNum === 1 || lvlNum === 2) {
+              // Niveaux 1-2: TRONC_COMMUN uniquement
+              if (MATIERES_BY_LEVEL['TRONC_COMMUN'] && MATIERES_BY_LEVEL['TRONC_COMMUN'][lvlNum]) {
+                list = MATIERES_BY_LEVEL['TRONC_COMMUN'][lvlNum];
+              } else {
+                list = MATIERES_MAP['TRONC_COMMUN'] || [];
+              }
+            } else if (fil.value) {
+              // Niveaux 3+: filière spécifique
+              if (lvlNum && MATIERES_BY_LEVEL[fil.value] && MATIERES_BY_LEVEL[fil.value][lvlNum]) {
+                list = MATIERES_BY_LEVEL[fil.value][lvlNum];
+              } else {
+                list = MATIERES_MAP[fil.value] || [];
+              }
+            } else if (lvlNum) {
+              // Niveaux 3+: toutes filières
+              for (const k in MATIERES_BY_LEVEL) {
+                if (MATIERES_BY_LEVEL[k] && MATIERES_BY_LEVEL[k][lvlNum]) {
+                  MATIERES_BY_LEVEL[k][lvlNum].forEach(m => list.push(m));
+                }
+              }
+              list = [...new Set(list)].filter(Boolean).sort();
+            } else {
+              list = getAllMatieres();
+            }
+
+            // Add matières to dropdown
+            list.forEach(m => {
+              if (m) {
+                const opt = document.createElement('option');
+                opt.value = m;
+                opt.textContent = m;
+                sel.appendChild(opt);
+              }
+            });
+          }
+
+          // Handle Recommendation form submission without page reload
+          document.addEventListener('DOMContentLoaded', function() {
+            const filEl = document.getElementById('filiere');
+            const nivEl = document.getElementById('niveau');
+            if (filEl) filEl.addEventListener('change', updateMatieres);
+            if (nivEl) nivEl.addEventListener('change', updateMatieres);
+            updateMatieres();
+            
+            // Prevent form reload and use AJAX
+            const form = document.getElementById('recommendationForm');
+            if (form) {
+              form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const actionUrl = form.getAttribute('action');
+                
+                fetch(actionUrl, {
+                  method: 'POST',
+                  body: formData
+                })
+                .then(response => response.text())
+                .then(html => {
+                  // Parse HTML to extract results section
+                  const parser = new DOMParser();
+                  const doc = parser.parseFromString(html, 'text/html');
+                  const resultsDiv = doc.getElementById('recommendationResults');
+                  if (resultsDiv) {
+                    document.getElementById('recommendationResults').innerHTML = resultsDiv.innerHTML;
+                  }
+                  // Scroll to results
+                  document.getElementById('recommendationResults').scrollIntoView({behavior: 'smooth'});
+                })
+                .catch(err => {
+                  console.error('Error submitting form:', err);
+                  alert('Erreur lors de la prédiction. Veuillez réessayer.');
+                });
+              });
+            }
+          });
+          
+          // Function to open programmer dialog
+          function openProgrammer(btn, type) {
+            const roomId = btn.getAttribute('data-room');
+            const teacherId = btn.getAttribute('data-teacher');
+            const date = document.getElementById('jour').value || new Date().toISOString().split('T')[0];
+            const heure = document.getElementById('heure').value || 'morning';
+            const niveau = document.getElementById('niveau').value;
+            const filiere = document.getElementById('filiere').value;
+            const matiere = document.getElementById('nom_matiere').value;
+            const typeCours = document.getElementById('Type_cours').value;
+            const effectif = document.getElementById('Nb_personnes').value;
+            
+            const slot = heure === 'morning' ? '7h30-11h30' : '12h30-16h30';
+            
+            if (type === 'room' && roomId) {
+              alert(`Programmer salle ${roomId}\\nDate: ${date}\\nCréneau: ${slot}\\nEffectif: ${effectif}\\n\\n(Intégration /api/program/ prochaine)`);
+            } else if (type === 'teacher' && teacherId) {
+              alert(`Programmer enseignant ${teacherId}\\nDate: ${date}\\nCréneau: ${slot}\\nMatière: ${matiere}\\n\\n(Intégration /api/program/ prochaine)`);
+            }
+          }
+        </script>
+
+        <!-- RECOMMANDATION & PLANIFICATION -->
+        <section class="page" id="page-recommendation" aria-label="Recommandation &amp; Planification intelligente">
+          <h1 class="page-title">Recommandation &amp; Planification intelligente</h1>
+
+          <div class="grid-2-vertical">
+            <!-- Server-side form that posts to the recommendation view -->
+            <form class="card form" id="recommendationForm" method="post" action="/recommendation/">
+              <div class="card-header">
+                <h2>Paramètres de la séance</h2>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="Nb_personnes">Effectif estimé *</label>
+                  <input name="Nb_personnes" id="Nb_personnes" type="number" min="1" required />
+                </div>
+                <div class="form-group">
+                  <label for="Type_cours">Type de séance *</label>
+                  <select name="Type_cours" id="Type_cours" required>
+                    <option value="CM">CM</option>
+                    <option value="TD">TD</option>
+                    <option value="TP">TP</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="besoin_projecteur">Besoin vidéoprojecteur</label>
+                  <select name="besoin_projecteur" id="besoin_projecteur">
+                    <option value="OUI">OUI</option>
+                    <option value="NON">NON</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="niveau">Niveau</label>
+                  <select name="niveau" id="niveau" required>
+                    <option value="">Sélectionner</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="filiere">Filière</label>
+                  <select name="filiere" id="filiere">
+                    <option value="">Toutes les filières</option>
+                    {% for f in filieres %}
+                      <option value="{{ f }}">{{ f }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="nom_matiere">Nom de la matière</label>
+                  <select name="nom_matiere" id="nom_matiere">
+                    <option value="">Choisir une matière</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="jour">Date / jour</label>
+                  <input name="jour" id="jour" type="date" />
+                </div>
+                <div class="form-group">
+                  <label for="heure">Tranche horaire</label>
+                  <select name="heure" id="heure">
+                    <option value="morning">7:30 - 11:30</option>
+                    <option value="afternoon">12:30 - 16:30</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-footer">
+                {% csrf_token %}
+                <button type="submit" class="btn primary">Prédire</button>
+                <div class="form-help">
+                  L’IA utilise la disponibilité, la spécialité, les heures restantes et l’historique des enseignants.
+                </div>
+              </div>
+            </form>
+
+            <!-- Right column: results rendered by Django view -->
+            <div class="card" id="recommendationResults">
+              <div class="card-header space-between">
+                <h2>Résultats de la recommandation IA</h2>
+                <span class="chip chip-ai">IA</span>
+              </div>
+
+              <div class="recommendation-block">
+                <h3>Top 3 salles recommandées</h3>
+                <div class="recommendation-list" id="roomRecommendations">
+                  {% for item in rooms %}
+                    <div class="recommendation-item">
+                      <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div>
+                          <span class="icon">🏫</span>
+                          <strong>{{ item.id }}</strong>
+                          <div class="small">{{ item.row.Nom_ressource }}</div>
+                        </div>
+                        <div style="text-align:right;">
+                          <div>{{ item.stars_str }}</div>
+                          <div>Score: {{ item.score|floatformat:3 }}</div>
+                        </div>
+                      </div>
+                      <div style="margin-top:6px;">Capacité: {{ item.row.Capacite }} • Projecteur: {{ item.row.Videoprojecteur }} • Type: {{ item.row.Type_ressource }}</div>
+                      <div style="margin-top:8px;text-align:right;">
+                        <button type="button" class="btn program-btn" data-room="{{ item.id }}" onclick="openProgrammer(this, 'room')">Programmer</button>
+                      </div>
+                    </div>
+                  {% empty %}
+                    <p>Aucune prédiction pour les salles.</p>
+                  {% endfor %}
+                </div>
+              </div>
+
+              <div class="recommendation-block">
+                <h3>Top 3 enseignants recommandés</h3>
+                <div class="recommendation-list" id="teacherRecommendations">
+                  {% for item in teachers %}
+                    <div class="recommendation-item">
+                      <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div>
+                          <span class="icon">👨‍🏫</span>
+                          <strong>{% if item.row.Nom %}{{ item.row.Nom }}{% else %}{{ item.id }}{% endif %}</strong>
+                          <div class="small">Matricule: {{ item.row.Enseignant_id }}</div>
+                        </div>
+                        <div style="text-align:right;">
+                          <div>{{ item.stars_str }}</div>
+                          <div>Score: {{ item.score|floatformat:3 }}</div>
+                        </div>
+                      </div>
+                      <div style="margin-top:6px;">Spécialité: {{ item.row.Specialite }} • Ancienneté: {{ item.row.Anciennete }} • Disponibilité: —</div>
+                      <div style="margin-top:8px;text-align:right;">
+                        <button type="button" class="btn program-btn" data-teacher="{{ item.row.Enseignant_id|default:item.id }}" onclick="openProgrammer(this, 'teacher')">Programmer</button>
+                      </div>
+                    </div>
+                  {% empty %}
+                    <p>Aucune prédiction pour les enseignants.</p>
+                  {% endfor %}
+                </div>
+              </div>
+
+              {% if errors %}
+                <div class="card" style="background:#fee;margin-top:12px;padding:8px;">
+                  <strong>Errors</strong>
+                  <ul>
+                    {% for e in errors %}<li>{{ e }}</li>{% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </section>
+
+        <!-- EMPLOI DU TEMPS -->
+        <section class="page" id="page-timetable" aria-label="Emploi du temps">
+          <h1 class="page-title">Emploi du temps</h1>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>Semaine académique</h2>
+            </div>
+            <div class="table-wrapper timetable">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Créneaux</th>
+                    <th>Lundi</th>
+                    <th>Mardi</th>
+                    <th>Mercredi</th>
+                    <th>Jeudi</th>
+                    <th>Vendredi</th>
+                    <th>Samedi</th>
+                  </tr>
+                </thead>
+                <tbody id="timetableBody">
+                  <!-- Rempli par JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- SUIVI DES ENSEIGNANTS -->
+        <section class="page" id="page-teachers" aria-label="Suivi des enseignants">
+          <h1 class="page-title">Suivi des enseignants</h1>
+
+          <div class="card">
+            <div class="card-header space-between">
+              <h2>Import &amp; suivi des charges</h2>
+              <label class="btn ghost">
+                Importer CSV / Excel
+                <input type="file" id="teacherFileInput" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" hidden />
+              </label>
+            </div>
+
+            <p class="card-help">
+              Colonnes obligatoires : Matricule, Nom, Filière(s), Matière(s), Heures totales prévues,
+              Heures déjà faites, Heures restantes.
+            </p>
+
+            <div class="table-wrapper">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Matricule</th>
+                    <th>Département</th>
+                    <th>Spécialité</th>
+                    <th>Niveau académique</th>
+                    <th>Heures totales</th>
+                    <th>Heures restantes</th>
+                  </tr>
+                </thead>
+                <tbody id="teacherTableBody">
+                  <!-- Rempli par JS (ou après import) -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- PRÉDICTION ACADÉMIQUE (PROMPT 2) -->
+        <section class="page" id="page-prediction" aria-label="Prédiction académique">
+          <h1 class="page-title">Prédiction académique</h1>
+
+          <div class="intro-message">
+            Veuillez entrer les données de l’étudiant afin d’effectuer une prédiction académique.
+          </div>
+
+          <div class="grid-2-vertical">
+            <form class="card form" id="predictionForm">
+              <div class="card-header">
+                <h2>Données de l’étudiant</h2>
+              </div>
+
+              <p class="form-help">
+                Les champs marqués par <span class="required">*</span> sont obligatoires pour lancer la prédiction.
+              </p>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="predName">Matricule</label>
+                  <input id="predName" type="text" placeholder="Ex: S001" />
+                </div>
+
+                <div class="form-group">
+                  <label for="predMajor">Filière <span class="required">*</span></label>
+                  <select id="predMajor" required>
+                    <option value="">Sélectionner</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="predLevel">Niveau <span class="required">*</span></label>
+                  <select id="predLevel" required>
+                    <option value="">Sélectionner</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="predAttendance">Taux de présence (%) <span class="required">*</span></label>
+                  <input id="predAttendance" type="number" min="0" max="100" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="predDistance">Distance domicile–école <span class="required">*</span></label>
+                  <select id="predDistance" required>
+                    <option value="">Sélectionner</option>
+                    <option value="<5">&lt;5km</option>
+                    <option value="5-15">5-15km</option>
+                    <option value=">15">&gt;15km</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="predProjects">Nombre de projets <span class="required">*</span></label>
+                  <input id="predProjects" type="number" min="0" max="20" required />
+                </div>
+              </div>
+
+              <div class="form-footer">
+                <button type="submit" class="btn primary" id="predictionBtn" disabled>
+                  Lancer la prédiction
+                </button>
+              </div>
+            </form>
+
+            <div class="card" id="predictionResults" hidden>
+              <div class="card-header">
+                <h2>Résultats de la prédiction</h2>
+              </div>
+
+              <div class="prediction-grid">
+                <div class="prediction-block">
+                  <div class="prediction-title">Moyenne annuelle prédite</div>
+                  <div class="prediction-value" id="predictedAverage">– / 20</div>
+                </div>
+                <div class="prediction-block">
+                  <div class="prediction-title">
+                    Probabilité de réussite académique
+                  </div>
+                  <div class="prediction-value" id="predictedSuccess">– %</div>
+                  <div class="progress-bar">
+                    <div class="progress-bar-inner" id="predictedSuccessBar"></div>
+                  </div>
+                </div>
+              </div>
+
+              <p class="prediction-message" id="predictionMessage">
+                Selon les données saisies, cet étudiant présente une probabilité élevée de réussite académique.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ANALYSE DES PERFORMANCES -->
+        <section class="page" id="page-analysis" aria-label="Analyse des performances">
+          <h1 class="page-title">Analyse des performances</h1>
+
+          <div class="grid-2-vertical">
+            <!-- Left column: Données Étudiant -->
+            <div class="card" style="padding:0;overflow:visible;">
+              <div class="card-header" style="background:var(--blue-main);color:#fff;border-radius:12px 12px 0 0;padding:12px 16px;margin:0;">
+                <h2 style="color:#fff;margin:0;">Données Étudiant</h2>
+              </div>
+
+              <form id="analysisForm" class="form" style="padding:16px;">
+                <div class="form-group">
+                  <label for="anName">Nom de l’étudiant</label>
+                  <input id="anName" type="text" placeholder="Ex: S001 / Nom" />
+                </div>
+
+                <div class="form-group">
+                  <label for="anAverage">Moyenne annuelle ( /20 )</label>
+                  <input id="anAverage" type="number" min="0" max="20" step="0.01" pattern="^\d+(\.\d{1,2})?$" title="Entrez un entier ou une valeur avec 1 ou 2 décimales, ex: 12 ou 12.3 ou 12.34" placeholder="Ex: 12.5" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="anPresence">Taux de présence (%)</label>
+                  <input id="anPresence" type="number" min="0" max="100" step="1" placeholder="Ex: 85" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="anProjects">Nombre de projets</label>
+                  <input id="anProjects" type="number" min="0" max="50" placeholder="Ex: 2" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="anDistance">Distance domicile–école</label>
+                  <select id="anDistance" required>
+                    <option value="">Sélectionner</option>
+                    <option value="<5">&lt;5km</option>
+                    <option value="5-15">5-15km</option>
+                    <option value=">15">&gt;15km</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="anTravaille">Travaille (job)</label>
+                  <select id="anTravaille">
+                    <option value="">Sélectionner</option>
+                    <option value="Oui">Oui</option>
+                    <option value="Non">Non</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="anStatus">Statut</label>
+                  <select id="anStatus" required>
+                    <option value="">Sélectionner</option>
+                    <option value="Admis">Admis</option>
+                    <option value="Echec">Échec</option>
+                  </select>
+                </div>
+
+                <div style="display:flex;justify-content:center;margin-top:12px;">
+                  <button id="analyzeBtn" class="btn primary" disabled>Analyser</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Right column: Analyse (stacked full-width cards will be injected here by JS) -->
+            <div class="card" id="analysisResults" hidden>
+              <div class="card-header">
+                <h2>Analyse</h2>
+              </div>
+
+              <!-- inner wrapper to position the slider and the scrollable area -->
+              <div class="card-inner" style="position:relative;">
+                <!-- scrollable area where JS injects full-width cards -->
+                <div id="analysisCards" class="analysis-scrollable" style="margin-top:10px;">
+                  <!-- JS will insert alternating full-width text and chart cards here -->
+                </div>
+
+                <!-- vertical slider on the right edge to control vertical scrolling -->
+                <div class="vertical-slider" aria-hidden="false">
+                  <input id="analysisScrollRange" type="range" min="0" max="100" value="0" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="/static/js/student-import.js"></script>
+  <script src="/static/js/teacher-import.js"></script>
+  <script src="/static/js/timetable.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

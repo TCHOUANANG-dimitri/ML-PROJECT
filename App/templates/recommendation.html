@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Recommendation</title>
+    <style>
+      .container { display:flex; gap:20px; }
+      .form-block { flex:1; }
+      .result-block { width:360px; border-left:1px solid #ddd; padding-left:16px; }
+      .card { border:1px solid #eee; padding:8px; margin-bottom:8px; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-block">
+        <h2>Formulaire</h2>
+        <form method="post">
+          {% csrf_token %}
+          <label>Nb_personnes: <input name="Nb_personnes" type="number" required></label><br>
+          <label>Type_cours:
+            <select name="Type_cours">
+              <option value="CM">CM</option>
+              <option value="TD">TD</option>
+              <option value="TP">TP</option>
+            </select>
+          </label><br>
+          <label>besoin_projecteur:
+            <select name="besoin_projecteur">
+              <option value="OUI">OUI</option>
+              <option value="NON">NON</option>
+            </select>
+          </label><br>
+          <label>niveau: <input name="niveau" /></label><br>
+          <label>filiere: <input name="filiere" /></label><br>
+          <label>nom_matiere: <input name="nom_matiere" /></label><br>
+          <label>jour: <input name="jour" type="date" /></label><br>
+          <label>heure: <input name="heure" type="time" /></label><br>
+          <button type="submit">Prédire</button>
+        </form>
+      </div>
+
+      <div class="result-block">
+        <h3>Recommandations</h3>
+
+        <h4>Salles (top 3)</h4>
+        {% for id, score, row in rooms %}
+          <div class="card">
+            <strong>{{ id }}</strong><br>
+            Score modèle: {{ score|floatformat:3 }}<br>
+            <small>{{ row.Nom_ressource }}</small>
+          </div>
+        {% empty %}
+          <p>Aucune prédiction pour les salles.</p>
+        {% endfor %}
+
+        <h4>Enseignants (top 3)</h4>
+        {% for id, score, row in teachers %}
+          <div class="card">
+            <strong>{{ row.Nom if row.Nom else id }}</strong><br>
+            Score modèle: {{ score|floatformat:3 }}<br>
+            <small>Anciennete: {{ row.Anciennete }}</small>
+          </div>
+        {% empty %}
+          <p>Aucune prédiction pour les enseignants.</p>
+        {% endfor %}
+
+        {% if errors %}
+          <div class="card" style="background:#fee">
+            <strong>Errors</strong>
+            <ul>
+            {% for e in errors %}<li>{{ e }}</li>{% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </body>
+</html>
