@@ -219,6 +219,14 @@ def parse_planning_file() -> tuple:
                 continue
 
             up = line.upper()
+            
+            # Detect 'TRONC' (common trunk) FIRST before filiere check
+            if "TRONC" in up:
+                current_filiere = "TRONC_COMMUN"
+                matieres_by_filiere_level.setdefault(current_filiere, {})
+                current_level = None
+                continue
+            
             # Detect filiere headings (lines containing FILIERE or FILI)
             if ("FILI" in up and up.find("FILI") < 20) or up.startswith("FIL") or ("FILIERE" in up) or ("FILIÈRE" in up):
                 # normalize: remove the keyword and emojis
@@ -232,13 +240,6 @@ def parse_planning_file() -> tuple:
                     current_filiere = cleaned
                     matieres_by_filiere_level.setdefault(current_filiere, {})
                     current_level = None
-                continue
-
-            # Detect 'TRONC' (common trunk)
-            if "TRONC" in up:
-                current_filiere = "TRONC_COMMUN"
-                matieres_by_filiere_level.setdefault(current_filiere, {})
-                current_level = None
                 continue
 
             # Detect level lines like 'NIVEAU 3'

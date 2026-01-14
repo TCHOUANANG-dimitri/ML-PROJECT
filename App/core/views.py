@@ -8,6 +8,12 @@ from datetime import date
 import csv
 from io import TextIOWrapper
 from ml_utils.data_prep import parse_planning_file
+from ml_utils.dbscan_analyzer import (
+    load_dbscan_model,
+    prepare_analysis_features,
+    predict_cluster,
+    generate_analysis_explanation
+)
 
 
 def index(request):
@@ -252,3 +258,78 @@ def api_upload_students(request):
       "students": filtered,
     }
   )
+
+
+@csrf_exempt
+@require_POST
+def api_analyze(request):
+  """
+  Analyze a student profile using DBSCAN clustering.
+  
+  Expected JSON body:
+  {
+    "name": "Student name or ID",
+    "average": 12.5,  (0-20)
+    "presence": 85,   (0-100)
+    "projects": 2,    (0+)
+    "distance": "<5" | "5-15" | ">15",
+    "works": "Oui" | "Non",
+    "status": "Admis" | "Échec"
+  }
+  
+  Returns:
+  {
+    "success": true,
+    "cluster_id": int,
+    "is_noise": bool,
+    "analysis_cards": [
+      { "type": "text", "title": "...", "content": "..." },
+      ...
+    ],
+    "error": null
+  }
+  """
+  try:
+    data = json.loads(request.body.decode("utf-8"))
+  except Exception as e:
+    return JsonResponse({"success": False, "error": f"Invalid JSON: {str(e)}"}, status=400)
+  
+  try:
+    # Load model
+    dbscan_model = load_dbscan_model()
+    if dbscan_model is None:
+      return JsonResponse({
+        "success": False,
+        "error": "Could not load DBSCAN model"
+      }, status=500)
+    
+    # Prepare features
+    features = prepare_analysis_features(data)
+    if features is None:
+      return JsonResponse({
+        "success": False,
+        "error": "Invalid form data"
+      }, status=400)
+    
+    # Predict cluster
+    cluster_result = predict_cluster(features, dbscan_model)
+    
+    # Generate analysis
+    student_name = data.get('name', 'Student')
+    analysis_cards = generate_analysis_explanation(cluster_result, student_name)
+    
+    return JsonResponse({
+      "success": True,
+      "cluster_id": cluster_result.get('cluster_id', -1),
+      "is_noise": cluster_result.get('is_noise', True),
+      "nearest_distance": cluster_result.get('nearest_distance'),
+      "analysis_cards": analysis_cards,
+      "error": None
+    })
+    
+  except Exception as e:
+    print(f"Error in api_analyze: {e}")
+    return JsonResponse({
+      "success": False,
+      "error": str(e)
+    }, status=500)

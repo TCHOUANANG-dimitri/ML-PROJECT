@@ -214,37 +214,44 @@ days.forEach((d) => {
 
 // Navigation -------------------------------------------------------------------
 
-const sidebar = document.getElementById("sidebar");
-const sidebarLogo = document.getElementById("sidebarLogo");
-const sidebarItems = Array.from(document.querySelectorAll(".sidebar-item"));
-const pages = Array.from(document.querySelectorAll(".page"));
+function initNavigation() {
+  const sidebar = document.getElementById("sidebar");
+  const sidebarLogo = document.getElementById("sidebarLogo");
+  const sidebarItems = Array.from(document.querySelectorAll(".sidebar-item"));
+  const pages = Array.from(document.querySelectorAll(".page"));
 
-sidebarLogo.addEventListener("click", () => {
-  sidebar.classList.toggle("collapsed");
-});
+  if (sidebarLogo && sidebar) {
+    sidebarLogo.addEventListener("click", () => {
+      sidebar.classList.toggle("collapsed");
+    });
+  }
 
-sidebarItems.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const page = btn.dataset.page;
-    activatePage(page);
+  sidebarItems.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const page = btn.dataset.page;
+      activatePage(page);
+    });
+
+    // simple tooltip via title based on label text (for collapsed mode)
+    const label = btn.querySelector(".label");
+    if (label) {
+      btn.title = label.textContent.trim();
+    }
   });
 
-  // simple tooltip via title based on label text (for collapsed mode)
-  const label = btn.querySelector(".label");
-  if (label) {
-    btn.title = label.textContent.trim();
-  }
-});
-
-document
-  .querySelectorAll("[data-page-target]")
-  .forEach((btn) =>
-    btn.addEventListener("click", () =>
-      activatePage(btn.getAttribute("data-page-target"))
-    )
-  );
+  document
+    .querySelectorAll("[data-page-target]")
+    .forEach((btn) =>
+      btn.addEventListener("click", () =>
+        activatePage(btn.getAttribute("data-page-target"))
+      )
+    );
+}
 
 function activatePage(pageName) {
+  const sidebarItems = Array.from(document.querySelectorAll(".sidebar-item"));
+  const pages = Array.from(document.querySelectorAll(".page"));
+  
   sidebarItems.forEach((b) =>
     b.classList.toggle("active", b.dataset.page === pageName)
   );
@@ -341,12 +348,16 @@ function refreshDashboard() {
 
 // Recommendation form ----------------------------------------------------------
 
-const recFiliereSelect = document.getElementById("recFiliere");
-const recNiveauSelect = document.getElementById("recNiveau");
-const recMatiereSelect = document.getElementById("recMatiere");
+// NOTE: Don't query these at module level - wait for DOM to be ready!
+let recFiliereSelect = null;
+let recNiveauSelect = null;
+let recMatiereSelect = null;
 
 function populateFiliereSelects() {
   // Recommendation filière
+  if (!recFiliereSelect) recFiliereSelect = document.getElementById("recFiliere");
+  if (!recFiliereSelect) return; // DOM not ready
+  
   recFiliereSelect.innerHTML = `<option value="">Sélectionner</option>`;
   Object.keys(filieresData).forEach((f) => {
     const opt = document.createElement("option");
@@ -369,6 +380,7 @@ function populateFiliereSelects() {
 }
 
 function populateMatiereOptions() {
+  if (!recFiliereSelect) return;
   const filiere = recFiliereSelect.value;
   const level = parseInt(recNiveauSelect.value, 10);
 
@@ -385,15 +397,22 @@ function populateMatiereOptions() {
   });
 }
 
-recFiliereSelect.addEventListener("change", populateMatiereOptions);
-recNiveauSelect.addEventListener("change", populateMatiereOptions);
+function initRecommendationForm() {
+  // Get form elements AFTER DOM is ready
+  recFiliereSelect = document.getElementById("recFiliere");
+  recNiveauSelect = document.getElementById("recNiveau");
+  recMatiereSelect = document.getElementById("recMatiere");
+  
+  if (recFiliereSelect && recNiveauSelect && recMatiereSelect) {
+    recFiliereSelect.addEventListener("change", populateMatiereOptions);
+    recNiveauSelect.addEventListener("change", populateMatiereOptions);
+  }
+}
 
-const recommendationForm = document.getElementById("recommendationForm");
-const recommendationResults = document.getElementById("recommendationResults");
-const roomRecommendationsDiv = document.getElementById("roomRecommendations");
-const teacherRecommendationsDiv = document.getElementById(
-  "teacherRecommendations"
-);
+let recommendationForm = null;
+let recommendationResults = null;
+let roomRecommendationsDiv = null;
+let teacherRecommendationsDiv = null;
 
 // Simple heuristic "IA" for recommendations
 function recommendRooms(effectif) {
@@ -446,8 +465,10 @@ function programCourse({ day, slotId, courseData }) {
   return { ok: true };
 }
 
-recommendationForm.addEventListener("submit", (e) => {
+function handleRecommendationSubmit(e) {
   e.preventDefault();
+  if (!recFiliereSelect) return;
+  
   const filiere = recFiliereSelect.value;
   const niveau = parseInt(recNiveauSelect.value, 10);
   const matiere = recMatiereSelect.value;
@@ -482,10 +503,27 @@ recommendationForm.addEventListener("submit", (e) => {
     date,
   });
 
-  recommendationResults.hidden = false;
-});
+  if (recommendationResults) {
+    recommendationResults.hidden = false;
+  }
+}
+
+// Attach form listener after DOM is ready
+function attachRecommendationFormListener() {
+  recommendationForm = document.getElementById("recommendationForm");
+  recommendationResults = document.getElementById("recommendationResults");
+  roomRecommendationsDiv = document.getElementById("roomRecommendations");
+  teacherRecommendationsDiv = document.getElementById("teacherRecommendations");
+  
+  if (recommendationForm) {
+    recommendationForm.addEventListener("submit", handleRecommendationSubmit);
+  }
+}
 
 function renderRoomRecommendations(list, context) {
+  if (!roomRecommendationsDiv) roomRecommendationsDiv = document.getElementById("roomRecommendations");
+  if (!roomRecommendationsDiv) return;
+  
   roomRecommendationsDiv.innerHTML = "";
   list.forEach((room, index) => {
     const wrapper = document.createElement("div");
@@ -1573,6 +1611,9 @@ if (analyzeBtn) {
 // Initialisation ---------------------------------------------------------------
 
 function init() {
+  initNavigation();  // Initialize navigation buttons and sidebar
+  initRecommendationForm();  // Initialize recommendation form
+  attachRecommendationFormListener();  // Attach form listeners
   populateFiliereSelects();
   // Do not render dashboard data until a student file is imported.
   refreshTimetable();
